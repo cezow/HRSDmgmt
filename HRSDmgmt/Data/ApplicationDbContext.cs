@@ -11,7 +11,7 @@ namespace HRSDmgmt.Data
         {
         }
 
-        public DbSet<Client> Clients { get; set; }
+        public DbSet<Company> Clients { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Offer> Offers { get; set; }
 
@@ -19,15 +19,15 @@ namespace HRSDmgmt.Data
         {
             base.OnModelCreating(ModelBuilder);
 
-            ModelBuilder.Entity<Client>()
+            ModelBuilder.Entity<Company>()
                 .HasMany(c => c.Employees)
-                .WithOne(e => e.Client);
+                .WithOne(e => e.Company);
 
             ModelBuilder.Entity<Employee>()
-                .HasOne(e => e.Client)
+                .HasOne(e => e.Company)
                 .WithMany(c => c.Employees);
 
-            ModelBuilder.Entity<Client>()
+            ModelBuilder.Entity<Company>()
                 .HasMany(c => c.Offers)
                 .WithOne(o => o.Client);
 
