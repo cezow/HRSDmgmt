@@ -32,9 +32,9 @@ namespace HRSDmgmt.Models
         [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}")]
         public System.DateTime EndDate { get; set; }
 
-        public int ClientId { get; set; }
-        [ForeignKey("ClientId")]
-        public virtual Company? Client { get; set; }
+        public int CompanytId { get; set; }
+        [ForeignKey("CompanytId")]
+        public virtual Company? Company { get; set; }
 
         public virtual List<Employee>? Employees { get; set; } 
     }

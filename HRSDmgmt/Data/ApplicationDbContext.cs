@@ -21,19 +21,24 @@ namespace HRSDmgmt.Data
 
             ModelBuilder.Entity<Company>()
                 .HasMany(c => c.Employees)
-                .WithOne(e => e.Company);
+                .WithOne(e => e.Company)
+                .OnDelete(DeleteBehavior.Restrict);
 
             ModelBuilder.Entity<Employee>()
                 .HasOne(e => e.Company)
-                .WithMany(c => c.Employees);
+                .WithMany(c => c.Employees)
+                .OnDelete(DeleteBehavior.Restrict);
 
             ModelBuilder.Entity<Company>()
                 .HasMany(c => c.Offers)
-                .WithOne(o => o.Client);
+                .WithOne(o => o.Company)
+                .OnDelete(DeleteBehavior.Restrict);
+
 
             ModelBuilder.Entity<Offer>()
-                .HasOne(o => o.Client)
-                .WithMany(c => c.Offers);
+                .HasOne(o => o.Company)
+                .WithMany(c => c.Offers)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

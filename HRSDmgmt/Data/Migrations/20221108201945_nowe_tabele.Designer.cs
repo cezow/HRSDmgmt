@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace HRSDmgmt.Data.Migrations
+namespace HRSDmgmt.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221103205045_new_tables")]
-    partial class new_tables
+    [Migration("20221108201945_nowe_tabele")]
+    partial class nowe_tabele
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,18 +24,56 @@ namespace HRSDmgmt.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("HRSDmgmt.Models.Client", b =>
+            modelBuilder.Entity("HRSDmgmt.Models.Company", b =>
                 {
-                    b.Property<int>("ClientId")
+                    b.Property<int>("CompanyId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ClientId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CompanyId"), 1L, 1);
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("ContactPerson")
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<bool>("Display")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
+
+                    b.Property<string>("Logo")
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<int>("Mobile")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
-                    b.HasKey("ClientId");
+                    b.HasKey("CompanyId");
 
                     b.ToTable("Clients");
                 });
@@ -48,18 +86,43 @@ namespace HRSDmgmt.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EmployeeId"), 1L, 1);
 
-                    b.Property<int>("ClientId")
+                    b.Property<string>("CV")
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<int>("CompanyId")
                         .HasColumnType("int");
 
                     b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int?>("OfferId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Photo")
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<string>("Profession")
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
+
+                    b.Property<string>("Skills")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.HasKey("EmployeeId");
 
-                    b.HasIndex("ClientId");
+                    b.HasIndex("CompanyId");
+
+                    b.HasIndex("OfferId");
 
                     b.ToTable("Employees");
                 });
@@ -72,15 +135,28 @@ namespace HRSDmgmt.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OfferId"), 1L, 1);
 
-                    b.Property<int>("ClientId")
+                    b.Property<int>("CompanytId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("OfferId");
 
-                    b.HasIndex("ClientId");
+                    b.HasIndex("CompanytId");
 
                     b.ToTable("Offers");
                 });
@@ -289,24 +365,28 @@ namespace HRSDmgmt.Data.Migrations
 
             modelBuilder.Entity("HRSDmgmt.Models.Employee", b =>
                 {
-                    b.HasOne("HRSDmgmt.Models.Client", "Client")
+                    b.HasOne("HRSDmgmt.Models.Company", "Company")
                         .WithMany("Employees")
-                        .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Client");
+                    b.HasOne("HRSDmgmt.Models.Offer", null)
+                        .WithMany("Employees")
+                        .HasForeignKey("OfferId");
+
+                    b.Navigation("Company");
                 });
 
             modelBuilder.Entity("HRSDmgmt.Models.Offer", b =>
                 {
-                    b.HasOne("HRSDmgmt.Models.Client", "Client")
+                    b.HasOne("HRSDmgmt.Models.Company", "Company")
                         .WithMany("Offers")
-                        .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("CompanytId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Client");
+                    b.Navigation("Company");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -360,11 +440,16 @@ namespace HRSDmgmt.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("HRSDmgmt.Models.Client", b =>
+            modelBuilder.Entity("HRSDmgmt.Models.Company", b =>
                 {
                     b.Navigation("Employees");
 
                     b.Navigation("Offers");
+                });
+
+            modelBuilder.Entity("HRSDmgmt.Models.Offer", b =>
+                {
+                    b.Navigation("Employees");
                 });
 #pragma warning restore 612, 618
         }

@@ -42,12 +42,12 @@ namespace HRSDmgmt.Models
         public string? Photo { get; set; }
 
         [DisplayName("CV pracownika:")]
-        [FileExtensions(Extensions = ". pdf,. doc,", ErrorMessage = "Niepoprawne rozszerzenie pliku.")]
+        [FileExtensions(Extensions = ". pdf,. doc,. docx", ErrorMessage = "Niepoprawne rozszerzenie pliku.")]
         [MaxLength(128)]
         public string? CV { get; set; }
 
         public int CompanyId { get; set; }
         [ForeignKey("CompanyId")]
-        public virtual Company? Company { get; set; }  
+        public virtual Company? Company { get; set; }
     }
 }
