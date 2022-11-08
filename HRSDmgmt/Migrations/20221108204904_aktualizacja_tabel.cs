@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HRSDmgmt.Migrations
 {
-    public partial class nowe_tabele : Migration
+    public partial class aktualizacja_tabel : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -49,7 +49,7 @@ namespace HRSDmgmt.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Clients",
+                name: "Companies",
                 columns: table => new
                 {
                     CompanyId = table.Column<int>(type: "int", nullable: false)
@@ -67,7 +67,7 @@ namespace HRSDmgmt.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Clients", x => x.CompanyId);
+                    table.PrimaryKey("PK_Companies", x => x.CompanyId);
                 });
 
             migrationBuilder.CreateTable(
@@ -192,9 +192,9 @@ namespace HRSDmgmt.Migrations
                 {
                     table.PrimaryKey("PK_Offers", x => x.OfferId);
                     table.ForeignKey(
-                        name: "FK_Offers_Clients_CompanytId",
+                        name: "FK_Offers_Companies_CompanytId",
                         column: x => x.CompanytId,
-                        principalTable: "Clients",
+                        principalTable: "Companies",
                         principalColumn: "CompanyId",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -218,9 +218,9 @@ namespace HRSDmgmt.Migrations
                 {
                     table.PrimaryKey("PK_Employees", x => x.EmployeeId);
                     table.ForeignKey(
-                        name: "FK_Employees_Clients_CompanyId",
+                        name: "FK_Employees_Companies_CompanyId",
                         column: x => x.CompanyId,
-                        principalTable: "Clients",
+                        principalTable: "Companies",
                         principalColumn: "CompanyId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -315,7 +315,7 @@ namespace HRSDmgmt.Migrations
                 name: "Offers");
 
             migrationBuilder.DropTable(
-                name: "Clients");
+                name: "Companies");
         }
     }
 }

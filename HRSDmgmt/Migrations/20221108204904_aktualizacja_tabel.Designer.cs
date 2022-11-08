@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HRSDmgmt.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221108201945_nowe_tabele")]
-    partial class nowe_tabele
+    [Migration("20221108204904_aktualizacja_tabel")]
+    partial class aktualizacja_tabel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -75,7 +75,7 @@ namespace HRSDmgmt.Migrations
 
                     b.HasKey("CompanyId");
 
-                    b.ToTable("Clients");
+                    b.ToTable("Companies");
                 });
 
             modelBuilder.Entity("HRSDmgmt.Models.Employee", b =>

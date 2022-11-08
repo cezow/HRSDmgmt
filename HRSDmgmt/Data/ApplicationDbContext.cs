@@ -11,7 +11,7 @@ namespace HRSDmgmt.Data
         {
         }
 
-        public DbSet<Company> Clients { get; set; }
+        public DbSet<Company> Companies { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Offer> Offers { get; set; }
 
