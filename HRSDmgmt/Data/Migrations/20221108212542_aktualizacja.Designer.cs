@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HRSDmgmt.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221108204904_aktualizacja_tabel")]
-    partial class aktualizacja_tabel
+    [Migration("20221108212542_aktualizacja")]
+    partial class aktualizacja
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -58,15 +58,16 @@ namespace HRSDmgmt.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Email")
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.Property<string>("Logo")
                         .HasMaxLength(128)
                         .HasColumnType("nvarchar(128)");
 
-                    b.Property<int>("Mobile")
-                        .HasColumnType("int");
+                    b.Property<string>("Mobile")
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
 
                     b.Property<string>("Name")
                         .IsRequired()

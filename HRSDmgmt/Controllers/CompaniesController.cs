@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HRSDmgmt.Data;
 using HRSDmgmt.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HRSDmgmt.Controllers
 {
@@ -58,9 +59,17 @@ namespace HRSDmgmt.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(company);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (!CompanyNameExists(company.Name))
+                {
+                    _context.Add(company);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                else 
+                {
+                    ViewBag.ErrorMessage = "Taka firma już istnieje w bazie";
+                    return View("Create");
+                }
             }
             return View(company);
         }
@@ -117,6 +126,7 @@ namespace HRSDmgmt.Controllers
         }
 
         // GET: Companies/Delete/5
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Companies == null)
@@ -135,6 +145,7 @@ namespace HRSDmgmt.Controllers
         }
 
         // POST: Companies/Delete/5
+        [Authorize(Roles = "admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -156,6 +167,11 @@ namespace HRSDmgmt.Controllers
         private bool CompanyExists(int id)
         {
           return _context.Companies.Any(e => e.CompanyId == id);
+        }
+
+        private bool CompanyNameExists(string? name)
+        {
+            return (_context.Companies?.Any(c => c.Name == name)).GetValueOrDefault();
         }
     }
 }

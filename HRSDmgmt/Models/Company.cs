@@ -10,7 +10,7 @@ namespace HRSDmgmt.Models
         public int CompanyId { get; set; }
 
         [Required(ErrorMessage = "Proszę podać nazwę firmy")]
-        [Display(Name = "Nazwa kategorii:")]
+        [Display(Name = "Nazwa firmy:")]
         [MaxLength(50, ErrorMessage = "Nazwa firmy nie może być dłuższa niż 50 znaków")]
         public string? Name { get; set; }
 
@@ -34,10 +34,11 @@ namespace HRSDmgmt.Models
         public string? ContactPerson { get; set; }
 
         [Display(Name = "Numer telefonu")]
-        public int Mobile { get; set; }
+        [MaxLength(15, ErrorMessage = "Numer telefonu nie może być dłuższe niż 15 znaków")]
+        public string? Mobile { get; set; }
 
         [Display(Name = "Adres e-mail")]
-        [MaxLength(15, ErrorMessage = "Adres e-mail nie może być dłuższy niż 15 znaków")]
+        [MaxLength(30, ErrorMessage = "Adres e-mail nie może być dłuższy niż 15 znaków")]
         public string? Email { get; set; }
 
         [Display(Name = "Logo firmy")]

@@ -70,6 +70,7 @@
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
             <td>
+                <i class="bi-building"></i>
                 @Html.DisplayFor(modelItem => item.Logo)
             </td>
             <td>
@@ -79,9 +80,20 @@
                 @Html.DisplayFor(modelItem => item.Display)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.CompanyId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.CompanyId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.CompanyId">Delete</a>
+                <a class="btn btn-outline-primary btn-sm rounded-3 my-1" asp-action="Edit" asp-route-id="@item.CompanyId">
+                    <i class="bi-pen-fill"></i>
+                </a>
+                <a class="btn btn-outline-secondary btn-sm rounded-3 my-1" asp-action="Details" asp-route-id="@item.CompanyId">
+                        <i class="bi-binoculars-fill"></i>
+                </a>
+                @{
+                    if (!User.IsInRole("admin"))
+                    {
+                        <a class="btn btn-outline-danger btn-sm rounded-3 my-1" asp-action="Delete" asp-route-id="@item.CompanyId">
+                                <i class="bi-trash3-fill"></i>
+                        </a>
+                    }   
+                }
             </td>
         </tr>
 }

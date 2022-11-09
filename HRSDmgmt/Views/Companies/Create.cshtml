@@ -4,9 +4,16 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1 class="text-info>Create</h1>
 
-<h4>Company</h4>
+@{
+    if (!String.IsNullOrEmpty(ViewBag.ErrorMessage))
+    {
+        <div class="alert alert-danger" role="alert">@ViewBag.ErrorMessage</div>
+    }
+}
+
+<h4">Company</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
