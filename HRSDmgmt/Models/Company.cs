@@ -14,6 +14,12 @@ namespace HRSDmgmt.Models
         [MaxLength(50, ErrorMessage = "Nazwa firmy nie może być dłuższa niż 50 znaków")]
         public string? Name { get; set; }
 
+        [Required(ErrorMessage = "Proszę podać nr NIP firmy")]
+        [Display(Name = "NIP firmy:")]
+        [MaxLength(10, ErrorMessage = "NIP firmy nie może być dłuższa niż 10 znaków")]
+        [MinLength(10, ErrorMessage = "NIP firmy nie może być krótsza niż 10 znaków")]
+        public string? NIP { get; set; }
+
         [Required(ErrorMessage = "Proszę podać opis firmy")]
         [Display(Name = "Opis firmy:")]
         [MaxLength(255, ErrorMessage = "Opis firmy nie może być dłuższy niż 255 znaków")]
@@ -21,7 +27,7 @@ namespace HRSDmgmt.Models
 
         [Required(ErrorMessage = "Proszę podać adres firmy")]
         [Display(Name = "Adres firmy:")]
-        [MaxLength(50, ErrorMessage = "Nazwa kategorii nie może być dłuższa niż 50 znaków")]
+        [MaxLength(50, ErrorMessage = "Adres firmy nie może być dłuższy niż 50 znaków")]
         public string? Address { get; set; }
 
         [Required(ErrorMessage = "Proszę podać kraj firmy")]
@@ -43,12 +49,12 @@ namespace HRSDmgmt.Models
 
         [Display(Name = "Logo firmy")]
         [MaxLength(128)]
-        [FileExtensions(Extensions = ". jpg,. png,. gif", ErrorMessage = "Niepoprawne rozszerzenie pliku.")]
+        [FileExtensions(Extensions = ".jpg, .png, .gif", ErrorMessage = "Niepoprawne rozszerzenie pliku.")]
         public string? Logo { get; set; }
 
         [Required]
         [Display(Name = "Czy firma aktywna?")]
-        [DefaultValue(true)]
+        [DefaultValue(false)]
         public bool Active { get; set; }
 
         [Required]
@@ -59,5 +65,7 @@ namespace HRSDmgmt.Models
         public virtual List<Employee>? Employees { get; set; }
 
         public virtual List<Offer>? Offers { get; set; }
+
+        public virtual AppUser? User { get; set; }
     }
 }

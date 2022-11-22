@@ -37,17 +37,19 @@ namespace HRSDmgmt.Models
         public string? Skills { get; set; }
 
         [Display(Name = "Zdjęcie pracownika:")]
-        [FileExtensions(Extensions = ". jpg,. png,. gif", ErrorMessage = "Niepoprawne rozszerzenie pliku.")]
+        [FileExtensions(Extensions = ".jpg, .png, .gif", ErrorMessage = "Niepoprawne rozszerzenie pliku.")]
         [MaxLength(128)]
         public string? Photo { get; set; }
 
         [DisplayName("CV pracownika:")]
-        [FileExtensions(Extensions = ". pdf,. doc,. docx", ErrorMessage = "Niepoprawne rozszerzenie pliku.")]
+        [FileExtensions(Extensions = " .pdf, .doc, .docx", ErrorMessage = "Niepoprawne rozszerzenie pliku.")]
         [MaxLength(128)]
         public string? CV { get; set; }
 
         public int CompanyId { get; set; }
         [ForeignKey("CompanyId")]
         public virtual Company? Company { get; set; }
+
+        public virtual AppUser? User { get; set; }
     }
 }

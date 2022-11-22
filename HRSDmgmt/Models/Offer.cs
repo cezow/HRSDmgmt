@@ -13,7 +13,7 @@ namespace HRSDmgmt.Models
 
         [Required(ErrorMessage = "Proszę podać nazwę oferty")]
         [DisplayName("Identyfikator oferty")]
-        [MaxLength(30, ErrorMessage = "Nazwaoferty nie może być dłuższa niż 30 znaków")]
+        [MaxLength(30, ErrorMessage = "Nazwa oferty nie może być dłuższa niż 30 znaków")]
         public string? Name { get; set; }
 
         [Required(ErrorMessage = "Proszę podać opis oferty")]
