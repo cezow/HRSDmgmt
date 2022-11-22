@@ -18,7 +18,7 @@ namespace HRSDmgmt.Models
         [Display(Name = "NIP firmy:")]
         [MaxLength(10, ErrorMessage = "NIP firmy nie może być dłuższa niż 10 znaków")]
         [MinLength(10, ErrorMessage = "NIP firmy nie może być krótsza niż 10 znaków")]
-        public string? NIP { get; set; }
+        public long NIP { get; set; }
 
         [Required(ErrorMessage = "Proszę podać opis firmy")]
         [Display(Name = "Opis firmy:")]
@@ -53,12 +53,12 @@ namespace HRSDmgmt.Models
         public string? Logo { get; set; }
 
         [Required]
-        [Display(Name = "Czy firma aktywna?")]
+        [DisplayName("Czy firma aktywna?")]
         [DefaultValue(false)]
         public bool Active { get; set; }
 
         [Required]
-        [Display(Name = "Czy wyświetlać?")]
+        [DisplayName("Czy wyświetlać?")]
         [DefaultValue(true)]
         public bool Display { get; set; }
 
