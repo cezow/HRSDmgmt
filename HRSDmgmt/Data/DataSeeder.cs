@@ -27,6 +27,7 @@ namespace HRSDmgmt.Data
         private static void SeedRoles(ApplicationDbContext dbContext)
         {
             var roleStore = new RoleStore<IdentityRole>(dbContext);
+
             if (!dbContext.Roles.Any(r => r.Name == "admin"))
             {
                 roleStore.CreateAsync(new IdentityRole
