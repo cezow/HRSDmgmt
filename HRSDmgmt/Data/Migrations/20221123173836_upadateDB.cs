@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HRSDmgmt.Migrations
 {
-    public partial class aktualizacja_tabel : Migration
+    public partial class upadateDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -28,6 +28,11 @@ namespace HRSDmgmt.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    Information = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    Photo = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -46,28 +51,6 @@ namespace HRSDmgmt.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Companies",
-                columns: table => new
-                {
-                    CompanyId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Country = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
-                    ContactPerson = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
-                    Mobile = table.Column<int>(type: "int", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: true),
-                    Logo = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: true),
-                    Active = table.Column<bool>(type: "bit", nullable: false),
-                    Display = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Companies", x => x.CompanyId);
                 });
 
             migrationBuilder.CreateTable(
@@ -177,22 +160,55 @@ namespace HRSDmgmt.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Offers",
+                name: "Companies",
+                columns: table => new
+                {
+                    CompanyId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    NIP = table.Column<long>(type: "bigint", maxLength: 10, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Country = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
+                    ContactPerson = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
+                    Mobile = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
+                    Logo = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: true),
+                    Active = table.Column<bool>(type: "bit", nullable: false),
+                    Display = table.Column<bool>(type: "bit", nullable: false),
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Companies", x => x.CompanyId);
+                    table.ForeignKey(
+                        name: "FK_Companies_AspNetUsers_Id",
+                        column: x => x.Id,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Offer",
                 columns: table => new
                 {
                     OfferId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    Vacancy = table.Column<int>(type: "int", nullable: false),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Active = table.Column<bool>(type: "bit", nullable: false),
+                    Display = table.Column<bool>(type: "bit", nullable: false),
                     CompanytId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Offers", x => x.OfferId);
+                    table.PrimaryKey("PK_Offer", x => x.OfferId);
                     table.ForeignKey(
-                        name: "FK_Offers_Companies_CompanytId",
+                        name: "FK_Offer_Companies_CompanytId",
                         column: x => x.CompanytId,
                         principalTable: "Companies",
                         principalColumn: "CompanyId",
@@ -207,16 +223,26 @@ namespace HRSDmgmt.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FirstName = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Mobile = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
+                    Education = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     Profession = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: true),
                     Skills = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
-                    Photo = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: true),
+                    Experience = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     CV = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: true),
                     CompanyId = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     OfferId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Employees", x => x.EmployeeId);
+                    table.ForeignKey(
+                        name: "FK_Employees_AspNetUsers_Id",
+                        column: x => x.Id,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Employees_Companies_CompanyId",
                         column: x => x.CompanyId,
@@ -224,9 +250,9 @@ namespace HRSDmgmt.Migrations
                         principalColumn: "CompanyId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Employees_Offers_OfferId",
+                        name: "FK_Employees_Offer_OfferId",
                         column: x => x.OfferId,
-                        principalTable: "Offers",
+                        principalTable: "Offer",
                         principalColumn: "OfferId");
                 });
 
@@ -270,9 +296,23 @@ namespace HRSDmgmt.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Companies_Id",
+                table: "Companies",
+                column: "Id",
+                unique: true,
+                filter: "[Id] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Employees_CompanyId",
                 table: "Employees",
                 column: "CompanyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Employees_Id",
+                table: "Employees",
+                column: "Id",
+                unique: true,
+                filter: "[Id] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Employees_OfferId",
@@ -280,8 +320,8 @@ namespace HRSDmgmt.Migrations
                 column: "OfferId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Offers_CompanytId",
-                table: "Offers",
+                name: "IX_Offer_CompanytId",
+                table: "Offer",
                 column: "CompanytId");
         }
 
@@ -309,13 +349,13 @@ namespace HRSDmgmt.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "Offers");
+                name: "Offer");
 
             migrationBuilder.DropTable(
                 name: "Companies");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
         }
     }
 }

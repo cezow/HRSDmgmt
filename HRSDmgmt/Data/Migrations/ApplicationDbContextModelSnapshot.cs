@@ -85,7 +85,7 @@ namespace HRSDmgmt.Migrations
                         .IsUnique()
                         .HasFilter("[Id] IS NOT NULL");
 
-                    b.ToTable("Companies", (string)null);
+                    b.ToTable("Companies");
                 });
 
             modelBuilder.Entity("HRSDmgmt.Models.Employee", b =>
@@ -153,7 +153,7 @@ namespace HRSDmgmt.Migrations
 
                     b.HasIndex("OfferId");
 
-                    b.ToTable("Employees", (string)null);
+                    b.ToTable("Employees");
                 });
 
             modelBuilder.Entity("HRSDmgmt.Models.Offer", b =>
@@ -196,7 +196,7 @@ namespace HRSDmgmt.Migrations
 
                     b.HasIndex("CompanytId");
 
-                    b.ToTable("Offer", (string)null);
+                    b.ToTable("Offer");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
