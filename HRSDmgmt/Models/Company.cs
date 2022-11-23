@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HRSDmgmt.Models
 {
@@ -66,6 +67,10 @@ namespace HRSDmgmt.Models
 
         public virtual List<Offer>? Offers { get; set; }
 
+        [DisplayName("Użytkownik firmy")]
+        public string? Id { get; set; }
+
+        [ForeignKey("Id")]
         public virtual AppUser? User { get; set; }
     }
 }

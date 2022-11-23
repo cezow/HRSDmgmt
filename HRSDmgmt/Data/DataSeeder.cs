@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using System.Drawing.Text;
 using HRSDmgmt.Models;
 using System.Reflection;
+using System.Xml.Linq;
+using System;
 
 namespace HRSDmgmt.Data
 {
@@ -36,6 +38,7 @@ namespace HRSDmgmt.Data
                     NormalizedName = "admin"
                 }).Wait();
             }
+
             if (!dbContext.Roles.Any(r => r.Name == "user"))
             {
                 roleStore.CreateAsync(new IdentityRole
@@ -44,6 +47,7 @@ namespace HRSDmgmt.Data
                     NormalizedName = "user"
                 }).Wait();
             }
+
             if (!dbContext.Roles.Any(r => r.Name == "company"))
             {
                 roleStore.CreateAsync(new IdentityRole
@@ -52,6 +56,7 @@ namespace HRSDmgmt.Data
                     NormalizedName = "company"
                 }).Wait();
             }
+
             if (!dbContext.Roles.Any(r => r.Name == "employee"))
             {
                 roleStore.CreateAsync(new IdentityRole
@@ -68,8 +73,8 @@ namespace HRSDmgmt.Data
             {
                 var user = new AppUser
                 {
-                    UserName = "admin",
-                    NormalizedUserName = "admin",
+                    UserName = "admin@firma.pl",
+                    NormalizedUserName = "admin@firma.pl",
                     Email = "admin@firm.pl",
                     EmailConfirmed = true,
                     LockoutEnabled = false,
@@ -90,8 +95,8 @@ namespace HRSDmgmt.Data
             {
                 var user = new AppUser
                 {
-                    UserName = "user",
-                    NormalizedUserName = "user",
+                    UserName = "user@firma.pl",
+                    NormalizedUserName = "user@firma.pl",
                     Email = "user@firma.pl",
                     EmailConfirmed = true,
                     LockoutEnabled = false,
@@ -114,8 +119,8 @@ namespace HRSDmgmt.Data
                 {
                     var user = new AppUser
                     {
-                        UserName = "company" + i.ToString(),
-                        NormalizedUserName = "company" + i.ToString(),
+                        UserName = "company" + i.ToString() + "@firma.pl",
+                        NormalizedUserName = "company" + i.ToString() + "@firma.pl",
                         Email = "company" + i.ToString() + "@firma.pl",
                         EmailConfirmed = true,
                         LockoutEnabled = false,
@@ -139,8 +144,8 @@ namespace HRSDmgmt.Data
                 {
                     var user = new AppUser
                     {
-                        UserName = "pracownik" + i.ToString(),
-                        NormalizedUserName = "company" + i.ToString(),
+                        UserName = "pracownik" + i.ToString() + "@firma.pl",
+                        NormalizedUserName = "company" + i.ToString() + "@firma.pl" ,
                         Email = "company" + i.ToString() + "@firma.pl",
                         EmailConfirmed = true,
                         LockoutEnabled = false,
@@ -212,50 +217,51 @@ namespace HRSDmgmt.Data
             {
                 for (int i = 1; i <= 6; i++)   
                 {
-                    var company1_id = dbContext.AppUsers.Where(u => u.UserName == "company1").FirstOrDefault().Id;
+                    var company1_id = dbContext.Companies.Where(c => c.CompanyId == 1).FirstOrDefault().CompanyId;
+                    var company2_id = dbContext.Companies.Where(c => c.CompanyId == 2).FirstOrDefault().CompanyId;
 
-
-                        var offer = new Models.Offer()
+                    var offer = new Models.Offer()
                         {
-                            
+                            Name        = "Oferta",
+                            Description = "Umowa o pracę w firmie" + (i<=4 ? "Stocznia Gdańska" : "PolService"),
+                            Vacancy     = 2,
+                            StartDate   = DateTime.Now.AddMonths(i),
+                            EndDate     = DateTime.Now.AddMonths(i+12),
+                            CompanytId  = i<=4 ? company1_id : company2_id,
+                            Active      = true,
+                            Display     =true
                         };
                         dbContext.Set<Models.Offer>().Add(offer);
                 }
                 dbContext.SaveChanges();
+            }
+        }
 
-                /* var idUzytkownika2 = dbContext.AppUsers.Where(u => u.UserName == "autor2@portal.pl").FirstOrDefault().Id;
+        private static void SeedEmployees(ApplicationDbContext dbContext)
+        {
+            if (!dbContext.Employees.Any())
+            {
+                var company1_id = dbContext.Companies.Where(c => c.CompanyId == 1).FirstOrDefault().CompanyId;
+                var company2_id = dbContext.Companies.Where(c => c.CompanyId == 2).FirstOrDefault().CompanyId;
 
-                for (int j = 5; j <= 9; j++) //teksty autora2
+                for (int i=0; i<=8; i++)
                 {
-                    var tekst = new Models.Text()
+                    var employee = new Models.Employee()
                     {
-                        Title = "Tytuł" + i.ToString() + j.ToString(),
-                        Summary = "Streszczenie tekstu o tytule Title" + i.ToString() + j.ToString(),
-                        Keywords = "tag" + j.ToString() + ", tag" + (i + j).ToString(),
-                        Content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor" +
-                            " incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation" +
-                            " ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit" +
-                            " in voluptate velit esse cillum dolore eu fugiat nulla pariatur.Excepteur sint occaecat cupidatat" +
-                            " non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Sed ut perspiciatis" +
-                            " unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam," +
-                            " eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo." +
-                            " Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur" +
-                            " magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum" +
-                            " quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut" +
-                            " labore et dolore magnamaliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem" +
-                            " ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure" +
-                            " reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem" +
-                            " eum fugiat quo voluptas nulla pariatur ? ",
-                        AddedDate = DateTime.Now.AddDays(-i * j),
-                        CategoryId = i,
-                        Id = idUzytkownika2,
-                        Active = true
+                        FirstName   = "Imię" + i.ToString(),
+                        LastName    = "Nazwisko" + i.ToString(),
+                        Mobile      = "(+48) 888-456-00" + i.ToString(),
+                        Email       = "Imię" + i.ToString() + "@hotmail.com",
+                        Education   = "Szkoła zawodowa",
+                        Profession  = i<=3 ? "spawacz" : "monter",
+                        Skills      = i <= 3 ? "spawanie metodą TIG 141 i elekrodą 111" : "znajomość rysunku izometrycznego",
+                        Experience  = i <= 3 ? "12 lat doświadczenia w pracach jako spawacz" : "montaż rurociągów i konstrukcji stalowych, praca na stoczni",
+                        CV          = "cv" + i + ".pdf",
                     };
-                    dbContext.Set<Models.Text>().Add(tekst);
+                    dbContext.Set<Models.Employee>().Add(employee);
                 }
-                dbContext.SaveChanges(); */
+                dbContext.SaveChanges();
             }
         }
     }
-    
 }

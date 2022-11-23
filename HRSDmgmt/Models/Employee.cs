@@ -28,6 +28,18 @@ namespace HRSDmgmt.Models
             get { return FirstName + " " + LastName; }
         }
 
+        [Display(Name = "Numer telefonu")]
+        [MaxLength(15, ErrorMessage = "Numer telefonu nie może być dłuższe niż 15 znaków")]
+        public string? Mobile { get; set; }
+
+        [Display(Name = "Adres e-mail")]
+        [MaxLength(30, ErrorMessage = "Adres e-mail nie może być dłuższy niż 15 znaków")]
+        public string? Email { get; set; }
+
+        [Display(Name = "Wykształcenie pracownika:")]
+        [MaxLength(255, ErrorMessage = "Zbyt długi opis - skróć do 255 znaków")]
+        public string? Education { get; set; }
+
         [Display(Name = "Zawód pracownika:")]
         [MaxLength(15, ErrorMessage = "Zbyt długi opis - skróć do 15 znaków")]
         public string? Profession { get; set; }
@@ -36,10 +48,9 @@ namespace HRSDmgmt.Models
         [MaxLength(255, ErrorMessage = "Zbyt długi opis - skróć do 255 znaków")]
         public string? Skills { get; set; }
 
-        [Display(Name = "Zdjęcie pracownika:")]
-        [FileExtensions(Extensions = ".jpg, .png, .gif", ErrorMessage = "Niepoprawne rozszerzenie pliku.")]
-        [MaxLength(128)]
-        public string? Photo { get; set; }
+        [Display(Name = "Doświadczenie pracownika:")]
+        [MaxLength(255, ErrorMessage = "Zbyt długi opis - skróć do 255 znaków")]
+        public string? Experience { get; set; }
 
         [DisplayName("CV pracownika:")]
         [FileExtensions(Extensions = " .pdf, .doc, .docx", ErrorMessage = "Niepoprawne rozszerzenie pliku.")]
@@ -50,6 +61,11 @@ namespace HRSDmgmt.Models
         [ForeignKey("CompanyId")]
         public virtual Company? Company { get; set; }
 
+        [DisplayName("Użytkownik pracownika")]
+        public string? Id { get; set; }
+
+        [ForeignKey("Id")]
         public virtual AppUser? User { get; set; }
+
     }
 }

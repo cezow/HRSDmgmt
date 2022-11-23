@@ -22,6 +22,10 @@ namespace HRSDmgmt.Models
         public string? Description { get; set; }
 
         [Required]
+        [DisplayName("Ilość poszukiwanych pracowników na stanowisko")]
+        public int Vacancy { get; set; }
+
+        [Required]
         [Display(Name = "Data początku prac")]
         [DataType(DataType.Date, ErrorMessage = "Niepoprawny format daty")]
         [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}")]
@@ -31,6 +35,16 @@ namespace HRSDmgmt.Models
         [DataType(DataType.Date, ErrorMessage = "Niepoprawny format daty")]
         [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}")]
         public System.DateTime EndDate { get; set; }
+
+        [Required]
+        [DisplayName("Czy oferta aktywna?")]
+        [DefaultValue(false)]
+        public bool Active { get; set; }
+
+        [Required]
+        [DisplayName("Czy wyświetlać?")]
+        [DefaultValue(true)]
+        public bool Display { get; set; }
 
         public int CompanytId { get; set; }
         [ForeignKey("CompanytId")]

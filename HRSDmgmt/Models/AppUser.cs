@@ -35,6 +35,7 @@ namespace HRSDmgmt.Models
         [MaxLength(128)]
         public string? Photo { get; set; }
 
+
         public virtual Company? Company { get; set; }
         public virtual Employee? Employee { get; set; }
     }
