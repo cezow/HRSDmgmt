@@ -11,7 +11,7 @@ namespace HRSDmgmt.Data
 {
     public class DataSeeder
     {
-        public static void Inizialize(IServiceProvider serviceprovider)
+        public static void Initialize(IServiceProvider serviceprovider)
         {
             using (var dbContext = new ApplicationDbContext(
                 serviceprovider.GetRequiredService<DbContextOptions<ApplicationDbContext>>()))
@@ -69,7 +69,7 @@ namespace HRSDmgmt.Data
         private static void SeedUsers(ApplicationDbContext dbContext)
         {
 
-            if (!dbContext.Users.Any(u => u.UserName == "admin"))
+            if (!dbContext.Users.Any(u => u.UserName == "admin@firma.pl"))
             {
                 var user = new AppUser
                 {
@@ -91,7 +91,7 @@ namespace HRSDmgmt.Data
                 userStore.AddToRoleAsync(user, "admin").Wait();
                 dbContext.SaveChanges();
             }
-            if (!dbContext.Users.Any(u => u.UserName == "user"))
+            if (!dbContext.Users.Any(u => u.UserName == "user@firma.pl"))
             {
                 var user = new AppUser
                 {

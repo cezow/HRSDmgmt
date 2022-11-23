@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HRSDmgmt.Migrations
 {
-    public partial class upadateDB : Migration
+    public partial class new_tabels : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

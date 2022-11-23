@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HRSDmgmt.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221123173836_upadateDB")]
-    partial class upadateDB
+    [Migration("20221123174733_new_tabels")]
+    partial class new_tabels
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
