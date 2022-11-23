@@ -1,16 +1,19 @@
 ﻿@model IEnumerable<HRSDmgmt.Models.Company>
 
 @{
-    ViewData["Title"] = "Lista Kontahentów";
+    ViewData["Title"] = "Index";
 }
-
-<h1>Index</h1>
+<div class="d-flex justify-content-center">
+<h1 class="d-inline-flex p-3 text-center text-secondary shadow-sm rounded-circle border-top border-white">FIRMY</h1>
+</div>
 
 <p>
-    <a asp-action="Create">Nowa firma</a>
+    <a asp-action="Create"><button class="btn btn-outline-primary rounded-5">Dodaj firmę</button></a>
 </p>
-<table class="table">
-    <thead>
+
+
+<table class="table bg-white shadow rounded-4" >
+    <thead class="bg-danger text-white">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Name)
@@ -27,7 +30,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.ContactPerson)
             </th>
-            <th>
+            <th style="width: 17%">
                 @Html.DisplayNameFor(model => model.Mobile)
             </th>
             <th>
@@ -42,7 +45,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Display)
             </th>
-            <th></th>
+            <th style="width: 12%"></th>
         </tr>
     </thead>
     <tbody>
@@ -89,9 +92,9 @@
                 @{
                     if (!User.IsInRole("admin"))
                     {
-                        <a class="btn btn-outline-danger btn-sm rounded-3 my-1" asp-action="Delete" asp-route-id="@item.CompanyId">
-                                <i class="bi-trash3-fill"></i>
-                        </a>
+                            <a class="btn btn-outline-danger btn-sm rounded-3 my-1" asp-action="Delete" asp-route-id="@item.CompanyId">
+                                    <i class="bi-trash3-fill"></i>
+                            </a>
                     }   
                 }
             </td>
@@ -99,3 +102,4 @@
 }
     </tbody>
 </table>
+
