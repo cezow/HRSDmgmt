@@ -115,7 +115,7 @@ namespace HRSDmgmt.Data
             }
             for (int i=1; i>=2; i++)
             {
-                if (!dbContext.Users.Any(u => u.UserName == "company"+ i.ToString()))
+                if (!dbContext.Users.Any(u => u.UserName == "company"+ i.ToString() + "@firma.pl"))
                 {
                     var user = new AppUser
                     {
@@ -140,13 +140,13 @@ namespace HRSDmgmt.Data
             }
             for (int i=1; i>=5; i++)
             {
-                if (!dbContext.Users.Any(u => u.UserName == "company" + i.ToString()))
+                if (!dbContext.Users.Any(u => u.UserName == "employee" + i.ToString() + "@firma.pl"))
                 {
                     var user = new AppUser
                     {
-                        UserName = "pracownik" + i.ToString() + "@firma.pl",
-                        NormalizedUserName = "company" + i.ToString() + "@firma.pl" ,
-                        Email = "company" + i.ToString() + "@firma.pl",
+                        UserName = "employee" + i.ToString() + "@firma.pl",
+                        NormalizedUserName = "employee" + i.ToString() + "@firma.pl" ,
+                        Email = "employee" + i.ToString() + "@firma.pl",
                         EmailConfirmed = true,
                         LockoutEnabled = false,
                         FirstName = "Imię" + (i + 2).ToString(),
@@ -174,13 +174,7 @@ namespace HRSDmgmt.Data
                     {
                         Name = "Stocznia Gdańska",
                         NIP = 1234567890,
-                        Description="jedna z największych polskich stoczni, zlokalizowana w Gdańsku na lewym brzegu Martwej Wisły i na Ostrowiu." +
-                        " Powstała po 1945 na terenach, gdzie wcześniej istniały niemieckie stocznie Jana Klawittera (od 1804), następnie Kaiserliche" +
-                        " Werft Danzig (od 1844) oraz Schichau (od 1890). Stocznia Gdańska w ciągu swojej działalności zbudowała ponad 1000 w pełni" +
-                        " wyposażonych statków pełnomorskich, m.in.: kontenerowców, statków pasażerskich i żaglowców. Na jej terenie miało miejsce" +
-                        " stłumienie protestów oraz zamordowanie trzech stoczniowców – ofiar wydarzeń Grudnia 1970. Z gdańskiej stoczni wywodzi się NSZZ „Solidarność”," +
-                        " na terenie zakładu podpisano porozumienia sierpniowe w 1980 roku. W 1996 roku postawiona w stan upadłości, następnie na bazie przedsiębiorstwa" +
-                        " powstała Stocznia Gdańska – Grupa Stoczni Gdynia SA, od 2006 roku – Stocznia Gdańsk SA.",
+                        Description="jedna z największych polskich stoczni, zlokalizowana w Gdańsku na lewym brzegu Martwej Wisły i na Ostrowiu.",
                         Address="Na Ostrowiu 15/20, 80-873 Gdańsk",
                         Country="Polska",
                         ContactPerson="Jan Rybak",
@@ -217,9 +211,6 @@ namespace HRSDmgmt.Data
             {
                 for (int i = 1; i <= 6; i++)   
                 {
-                    var company1_id = dbContext.Companies.Where(c => c.CompanyId == 1).FirstOrDefault().CompanyId;
-                    var company2_id = dbContext.Companies.Where(c => c.CompanyId == 2).FirstOrDefault().CompanyId;
-
                     var offer = new Models.Offer()
                         {
                             Name        = "Oferta",
@@ -227,13 +218,15 @@ namespace HRSDmgmt.Data
                             Vacancy     = 2,
                             StartDate   = DateTime.Now.AddMonths(i),
                             EndDate     = DateTime.Now.AddMonths(i+12),
-                            CompanytId  = i<=4 ? company1_id : company2_id,
+                            CompanyId   = i<=4 ? 1 : 2,
                             Active      = true,
-                            Display     =true
+                            Display     = true
                         };
                         dbContext.Set<Models.Offer>().Add(offer);
+                        
                 }
                 dbContext.SaveChanges();
+
             }
         }
 
@@ -241,9 +234,6 @@ namespace HRSDmgmt.Data
         {
             if (!dbContext.Employees.Any())
             {
-                var company1_id = dbContext.Companies.Where(c => c.CompanyId == 1).FirstOrDefault().CompanyId;
-                var company2_id = dbContext.Companies.Where(c => c.CompanyId == 2).FirstOrDefault().CompanyId;
-
                 for (int i=0; i<=8; i++)
                 {
                     var employee = new Models.Employee()
@@ -251,7 +241,7 @@ namespace HRSDmgmt.Data
                         FirstName   = "Imię" + i.ToString(),
                         LastName    = "Nazwisko" + i.ToString(),
                         Mobile      = "(+48) 888-456-00" + i.ToString(),
-                        Email       = "Imię" + i.ToString() + "@hotmail.com",
+                        Email       = "employee" + i.ToString() + "@hotmail.com",
                         Education   = "Szkoła zawodowa",
                         Profession  = i<=3 ? "spawacz" : "monter",
                         Skills      = i <= 3 ? "spawanie metodą TIG 141 i elekrodą 111" : "znajomość rysunku izometrycznego",
@@ -259,6 +249,7 @@ namespace HRSDmgmt.Data
                         CV          = "cv" + i + ".pdf",
                     };
                     dbContext.Set<Models.Employee>().Add(employee);
+                    
                 }
                 dbContext.SaveChanges();
             }

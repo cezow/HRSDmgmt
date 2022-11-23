@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HRSDmgmt.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221123174733_new_tabels")]
-    partial class new_tabels
+    [Migration("20221123190912_1")]
+    partial class _1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -69,8 +69,8 @@ namespace HRSDmgmt.Migrations
                         .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Mobile")
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<long>("NIP")
                         .HasMaxLength(10)
@@ -102,7 +102,7 @@ namespace HRSDmgmt.Migrations
                         .HasMaxLength(128)
                         .HasColumnType("nvarchar(128)");
 
-                    b.Property<int>("CompanyId")
+                    b.Property<int?>("CompanyId")
                         .HasColumnType("int");
 
                     b.Property<string>("Education")
@@ -131,8 +131,8 @@ namespace HRSDmgmt.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Mobile")
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<int?>("OfferId")
                         .HasColumnType("int");
@@ -169,7 +169,7 @@ namespace HRSDmgmt.Migrations
                     b.Property<bool>("Active")
                         .HasColumnType("bit");
 
-                    b.Property<int>("CompanytId")
+                    b.Property<int>("CompanyId")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
@@ -196,7 +196,7 @@ namespace HRSDmgmt.Migrations
 
                     b.HasKey("OfferId");
 
-                    b.HasIndex("CompanytId");
+                    b.HasIndex("CompanyId");
 
                     b.ToTable("Offer");
                 });
@@ -444,11 +444,9 @@ namespace HRSDmgmt.Migrations
 
             modelBuilder.Entity("HRSDmgmt.Models.Employee", b =>
                 {
-                    b.HasOne("HRSDmgmt.Models.Company", "Company")
+                    b.HasOne("HRSDmgmt.Models.Company", null)
                         .WithMany("Employees")
-                        .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("CompanyId");
 
                     b.HasOne("HRSDmgmt.Models.AppUser", "User")
                         .WithOne("Employee")
@@ -459,8 +457,6 @@ namespace HRSDmgmt.Migrations
                         .WithMany("Employees")
                         .HasForeignKey("OfferId");
 
-                    b.Navigation("Company");
-
                     b.Navigation("User");
                 });
 
@@ -468,7 +464,7 @@ namespace HRSDmgmt.Migrations
                 {
                     b.HasOne("HRSDmgmt.Models.Company", "Company")
                         .WithMany("Offers")
-                        .HasForeignKey("CompanytId")
+                        .HasForeignKey("CompanyId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 

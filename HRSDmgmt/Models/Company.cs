@@ -41,7 +41,7 @@ namespace HRSDmgmt.Models
         public string? ContactPerson { get; set; }
 
         [Display(Name = "Numer telefonu")]
-        [MaxLength(15, ErrorMessage = "Numer telefonu nie może być dłuższe niż 15 znaków")]
+        [MaxLength(20, ErrorMessage = "Numer telefonu nie może być dłuższe niż 15 znaków")]
         public string? Mobile { get; set; }
 
         [Display(Name = "Adres e-mail")]

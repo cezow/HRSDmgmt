@@ -46,8 +46,8 @@ namespace HRSDmgmt.Models
         [DefaultValue(true)]
         public bool Display { get; set; }
 
-        public int CompanytId { get; set; }
-        [ForeignKey("CompanytId")]
+        public int CompanyId { get; set; }
+        [ForeignKey("CompanyId")]
         public virtual Company? Company { get; set; }
 
         public virtual List<Employee>? Employees { get; set; } 

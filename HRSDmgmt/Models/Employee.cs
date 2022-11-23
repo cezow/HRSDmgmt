@@ -29,7 +29,7 @@ namespace HRSDmgmt.Models
         }
 
         [Display(Name = "Numer telefonu")]
-        [MaxLength(15, ErrorMessage = "Numer telefonu nie może być dłuższe niż 15 znaków")]
+        [MaxLength(20, ErrorMessage = "Numer telefonu nie może być dłuższe niż 15 znaków")]
         public string? Mobile { get; set; }
 
         [Display(Name = "Adres e-mail")]
@@ -57,15 +57,12 @@ namespace HRSDmgmt.Models
         [MaxLength(128)]
         public string? CV { get; set; }
 
-        public int CompanyId { get; set; }
-        [ForeignKey("CompanyId")]
-        public virtual Company? Company { get; set; }
-
         [DisplayName("Użytkownik pracownika")]
         public string? Id { get; set; }
 
         [ForeignKey("Id")]
         public virtual AppUser? User { get; set; }
+
 
     }
 }

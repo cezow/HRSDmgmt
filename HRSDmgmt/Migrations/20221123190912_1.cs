@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HRSDmgmt.Migrations
 {
-    public partial class new_tabels : Migration
+    public partial class _1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -171,7 +171,7 @@ namespace HRSDmgmt.Migrations
                     Address = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Country = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
                     ContactPerson = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
-                    Mobile = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: true),
+                    Mobile = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
                     Logo = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: true),
                     Active = table.Column<bool>(type: "bit", nullable: false),
@@ -202,14 +202,14 @@ namespace HRSDmgmt.Migrations
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Active = table.Column<bool>(type: "bit", nullable: false),
                     Display = table.Column<bool>(type: "bit", nullable: false),
-                    CompanytId = table.Column<int>(type: "int", nullable: false)
+                    CompanyId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Offer", x => x.OfferId);
                     table.ForeignKey(
-                        name: "FK_Offer_Companies_CompanytId",
-                        column: x => x.CompanytId,
+                        name: "FK_Offer_Companies_CompanyId",
+                        column: x => x.CompanyId,
                         principalTable: "Companies",
                         principalColumn: "CompanyId",
                         onDelete: ReferentialAction.Restrict);
@@ -223,15 +223,15 @@ namespace HRSDmgmt.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FirstName = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Mobile = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: true),
+                    Mobile = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
                     Education = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     Profession = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: true),
                     Skills = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     Experience = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     CV = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: true),
-                    CompanyId = table.Column<int>(type: "int", nullable: false),
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    CompanyId = table.Column<int>(type: "int", nullable: true),
                     OfferId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -247,8 +247,7 @@ namespace HRSDmgmt.Migrations
                         name: "FK_Employees_Companies_CompanyId",
                         column: x => x.CompanyId,
                         principalTable: "Companies",
-                        principalColumn: "CompanyId",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "CompanyId");
                     table.ForeignKey(
                         name: "FK_Employees_Offer_OfferId",
                         column: x => x.OfferId,
@@ -320,9 +319,9 @@ namespace HRSDmgmt.Migrations
                 column: "OfferId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Offer_CompanytId",
+                name: "IX_Offer_CompanyId",
                 table: "Offer",
-                column: "CompanytId");
+                column: "CompanyId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

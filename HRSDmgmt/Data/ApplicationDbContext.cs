@@ -23,7 +23,7 @@ namespace HRSDmgmt.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Company>()
+           /* modelBuilder.Entity<Company>()
                 .HasMany(c => c.Employees)
                 .WithOne(e => e.Company)
                 .OnDelete(DeleteBehavior.Restrict);
@@ -31,7 +31,7 @@ namespace HRSDmgmt.Data
             modelBuilder.Entity<Employee>()
                 .HasOne(e => e.Company)
                 .WithMany(c => c.Employees)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Restrict); */
 
             modelBuilder.Entity<Company>()
                 .HasMany(c => c.Offers)
