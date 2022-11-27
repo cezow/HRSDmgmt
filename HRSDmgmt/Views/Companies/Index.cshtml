@@ -19,6 +19,9 @@
                 @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.NIP)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Description)
             </th>
             <th>
@@ -37,7 +40,7 @@
                 @Html.DisplayNameFor(model => model.Email)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Logo)
+                @Html.DisplayNameFor(model => model.Www)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Active)
@@ -52,7 +55,10 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                <b>@Html.DisplayFor(modelItem => item.Name)</b>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NIP)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Description)
@@ -73,8 +79,7 @@
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
             <td>
-                <i class="bi-building"></i>
-                @Html.DisplayFor(modelItem => item.Logo)
+                @Html.DisplayFor(modelItem => item.Www)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Active)

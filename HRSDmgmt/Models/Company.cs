@@ -11,55 +11,54 @@ namespace HRSDmgmt.Models
         public int CompanyId { get; set; }
 
         [Required(ErrorMessage = "Proszę podać nazwę firmy")]
-        [Display(Name = "Nazwa firmy:")]
+        [Display(Name = "Nazwa")]
         [MaxLength(50, ErrorMessage = "Nazwa firmy nie może być dłuższa niż 50 znaków")]
         public string? Name { get; set; }
 
-        [Required(ErrorMessage = "Proszę podać nr NIP firmy")]
-        [Display(Name = "NIP firmy:")]
+
+        [DisplayName("NIP")]
         [MaxLength(10, ErrorMessage = "NIP firmy nie może być dłuższa niż 10 znaków")]
         [MinLength(10, ErrorMessage = "NIP firmy nie może być krótsza niż 10 znaków")]
-        public long NIP { get; set; }
+        public string? NIP { get; set; }
 
         [Required(ErrorMessage = "Proszę podać opis firmy")]
-        [Display(Name = "Opis firmy:")]
+        [Display(Name = "Opis")]
         [MaxLength(255, ErrorMessage = "Opis firmy nie może być dłuższy niż 255 znaków")]
         public string? Description { get; set; }
 
         [Required(ErrorMessage = "Proszę podać adres firmy")]
-        [Display(Name = "Adres firmy:")]
+        [Display(Name = "Adres")]
         [MaxLength(50, ErrorMessage = "Adres firmy nie może być dłuższy niż 50 znaków")]
         public string? Address { get; set; }
 
         [Required(ErrorMessage = "Proszę podać kraj firmy")]
-        [Display(Name = "Kraj firmy:")]
+        [Display(Name = "Kraj")]
         [MaxLength(15, ErrorMessage = "Nazwa kategorii nie może być dłuższa niż 15 znaków")]
         public string? Country { get; set; }
 
-        [Display(Name = "Osoba do kontaktu:")]
+        [Display(Name = "Kontakt")]
         [MaxLength(30, ErrorMessage = "Imię i nazwisko osoby do kontaktu nie może być dłuższe niż 30 znaków")]
         public string? ContactPerson { get; set; }
 
-        [Display(Name = "Numer telefonu")]
+        [Display(Name = "Telefon")]
         [MaxLength(20, ErrorMessage = "Numer telefonu nie może być dłuższe niż 15 znaków")]
         public string? Mobile { get; set; }
 
-        [Display(Name = "Adres e-mail")]
+        [Display(Name = "E-mail")]
         [MaxLength(30, ErrorMessage = "Adres e-mail nie może być dłuższy niż 15 znaków")]
         public string? Email { get; set; }
 
-        [Display(Name = "Logo firmy")]
-        [MaxLength(128)]
-        [FileExtensions(Extensions = ".jpg, .png, .gif", ErrorMessage = "Niepoprawne rozszerzenie pliku.")]
-        public string? Logo { get; set; }
+        [DisplayName("Strona internetowa firmy")]
+        [MaxLength(30, ErrorMessage = "Adres strony wwww nie może być dłuższy niż 30 znaków")]
+        public string? Www { get; set; }
 
         [Required]
-        [DisplayName("Czy firma aktywna?")]
+        [DisplayName("aktywna?")]
         [DefaultValue(false)]
         public bool Active { get; set; }
 
         [Required]
-        [DisplayName("Czy wyświetlać?")]
+        [DisplayName("wyświetlać?")]
         [DefaultValue(true)]
         public bool Display { get; set; }
 
@@ -67,7 +66,7 @@ namespace HRSDmgmt.Models
 
         public virtual List<Offer>? Offers { get; set; }
 
-        [DisplayName("Użytkownik firmy")]
+        [DisplayName("Użytkownik")]
         public string? Id { get; set; }
 
         [ForeignKey("Id")]

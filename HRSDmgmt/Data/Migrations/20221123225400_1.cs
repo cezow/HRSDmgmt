@@ -166,14 +166,14 @@ namespace HRSDmgmt.Migrations
                     CompanyId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    NIP = table.Column<long>(type: "bigint", maxLength: 10, nullable: false),
+                    NIP = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
                     Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     Address = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Country = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
                     ContactPerson = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
                     Mobile = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
-                    Logo = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: true),
+                    Www = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
                     Active = table.Column<bool>(type: "bit", nullable: false),
                     Display = table.Column<bool>(type: "bit", nullable: false),
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: true)

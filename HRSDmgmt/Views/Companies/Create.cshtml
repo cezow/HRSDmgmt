@@ -4,7 +4,7 @@
     ViewData["Title"] = "Create";
 }
 
-<h1 class="text-info>Create</h1>
+<h1 class="text-secondary"">Dodanie</h1>
 
 @{
     if (!String.IsNullOrEmpty(ViewBag.ErrorMessage))
@@ -13,7 +13,9 @@
     }
 }
 
-<h4">Company</h4>
+<h4 class="text-success""> Nowa firma</h4>
+
+
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -24,6 +26,11 @@
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
+                <div class="form-group">
+                    <label asp-for="NIP" class="control-label"></label>
+                    <input asp-for="NIP" class="form-control"> </input>
+                    <span asp-validation-for="NIP" class="text-danger"></span>
+                </div>
             <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>
                 <textarea asp-for="Description" class="form-control" > </textarea>
@@ -55,9 +62,9 @@
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Logo" class="control-label"></label>
-                <input asp-for="Logo" class="form-control" />
-                <span asp-validation-for="Logo" class="text-danger"></span>
+                <label asp-for="Www" class="control-label"></label>
+                <input asp-for="Www" class="form-control" />
+                <span asp-validation-for="Www" class="text-danger"></span>
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">

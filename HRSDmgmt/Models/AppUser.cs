@@ -4,39 +4,37 @@ using static System.Net.Mime.MediaTypeNames;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.Xml.Linq;
+using System.Runtime.InteropServices;
+using System.ComponentModel;
 
 namespace HRSDmgmt.Models
 {
     public class AppUser : IdentityUser
     {
-        [Display(Name = "Imię użytkownika:")]
+        [Display(Name = "Imię")]
         [MaxLength(20)]
         public string? FirstName { get; set; }
 
-        [Display(Name = "Nazwisko użytkownika:")]
+        [Display(Name = "Nazwisko")]
         [MaxLength(50)]
         public string? LastName { get; set; }
 
-        #region dodatkowe pole nieodwzorowywane w bazie
-        [NotMapped] //nie mapuj do bazy danych
-        [Display(Name = "Pan/Pani:")]
+
+        [NotMapped]
+        [Display(Name = "Pan/Pani")]
         public string FullName
         {
             get { return FirstName + " " + LastName; }
         }
-        #endregion
 
-        [Display(Name = "Informacja o użytkowniku:")]
-        [MaxLength(255, ErrorMessage = "Zbyt długi opis - skróć do 255 znaków")]
-        public string? Information { get; set; }
-
-        [Display(Name = "Zdjęcie użytkownika:")]
-        [FileExtensions(Extensions = ".jpg, .png, .gif", ErrorMessage = "Niepoprawne rozszerzenie pliku.")]
-        [MaxLength(128)]
-        public string? Photo { get; set; }
-
+        
+        [Display(Name = "Konto firmowe?")]
+        [DefaultValue(true)]
+        public bool IsCompany { get; set; }
 
         public virtual Company? Company { get; set; }
         public virtual Employee? Employee { get; set; }
+
+
     }
 }

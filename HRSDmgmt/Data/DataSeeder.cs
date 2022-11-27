@@ -80,8 +80,7 @@ namespace HRSDmgmt.Data
                     LockoutEnabled = false,
                     FirstName = "Adam",
                     LastName = "Ruciński",
-                    Photo = "user1.jpg",
-                    Information = "Guru informatyczny w firmie. Wielu kolegów z pracy uważa, że jest kosmitą z innej planety."
+                    IsCompany = false
                 };
                 var password = new PasswordHasher<AppUser>();
                 var hashed = password.HashPassword(user, "Firmowe1!");
@@ -102,8 +101,7 @@ namespace HRSDmgmt.Data
                     LockoutEnabled = false,
                     FirstName = "Anna",
                     LastName = "Sekretarska",
-                    Photo = "user2.png",
-                    Information = "Najpilniejsza z najpilniejszych. Poprostu bezbłędna"
+                    IsCompany = false
                 };
                 var password = new PasswordHasher<AppUser>();
                 var hashed = password.HashPassword(user, "Firmowe1!");
@@ -126,8 +124,7 @@ namespace HRSDmgmt.Data
                         LockoutEnabled = false,
                         FirstName = "Imię" + i.ToString(),
                         LastName = "Nazwisko" + i   ,
-                        Photo = "user" + (i + 2).ToString() + ".png",
-                        Information = "Monopolista na rynku"
+                        IsCompany = true
                     };
                     var password = new PasswordHasher<AppUser>();
                     var hashed = password.HashPassword(user, "Firmowe1!");
@@ -151,8 +148,7 @@ namespace HRSDmgmt.Data
                         LockoutEnabled = false,
                         FirstName = "Imię" + (i + 2).ToString(),
                         LastName = "Nazwisko" + (i + 2).ToString(),
-                        Photo = "user5.png",
-                        Information = "Kolejna nieperspektywiczna osoba z dużymi wymaganiami szukająca pracy"
+                        IsCompany = false
                     };
                     var password = new PasswordHasher<AppUser>();
                     var hashed = password.HashPassword(user, "Firmowe1!");
@@ -173,14 +169,14 @@ namespace HRSDmgmt.Data
                     new Company
                     {
                         Name = "Stocznia Gdańska",
-                        NIP = 1234567890,
+                        NIP = "1234567890",
                         Description="jedna z największych polskich stoczni, zlokalizowana w Gdańsku na lewym brzegu Martwej Wisły i na Ostrowiu.",
                         Address="Na Ostrowiu 15/20, 80-873 Gdańsk",
                         Country="Polska",
                         ContactPerson="Jan Rybak",
                         Mobile="(+48) 658-778-114",
                         Email="jan.rybak@stocznia.pl",
-                        Logo="logo1.png",
+                        Www="https://www.sg.pl",
                         Active=true,
                         Display=true
                     },
@@ -188,14 +184,14 @@ namespace HRSDmgmt.Data
                     new Company
                     {
                         Name = "PolService",
-                        NIP = 1234567891,
+                        NIP = "1234567891",
                         Description="Przedsiębiorstwo budowlane",
                         Address="Skrajna 1, 22-233 Poznań",
                         Country="Polska",
                         ContactPerson="Zenon Artysta",
                         Mobile="(+48) 678-444-242",
                         Email="za@polservice.pl",
-                        Logo="logo2.png",
+                        Www="https://wwww.polservice.com.pl",
                         Active=true,
                         Display=true
                     },
