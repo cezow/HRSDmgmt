@@ -11,8 +11,8 @@ namespace HRSDmgmt.Models
         [DisplayName("Identyfikator oferty")]
         public int OfferId { get; set; }
 
-        [Required(ErrorMessage = "Proszę podać nazwę oferty")]
-        [DisplayName("Identyfikator oferty")]
+        [Required(ErrorMessage = "Proszę podać nazwę firmy")]
+        [DisplayName("Firma")]
         [MaxLength(30, ErrorMessage = "Nazwa oferty nie może być dłuższa niż 30 znaków")]
         public string? Name { get; set; }
 
@@ -25,13 +25,18 @@ namespace HRSDmgmt.Models
         [DisplayName("Ilość poszukiwanych pracowników na stanowisko")]
         public int Vacancy { get; set; }
 
+        [Display(Name = "Publikacja")]
+        [DataType(DataType.Date, ErrorMessage = "Niepoprawny format daty")]
+        [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}")]
+        public System.DateTime AddDate { get; set; }
+
         [Required]
-        [Display(Name = "Data początku prac")]
+        [Display(Name = "Start prac")]
         [DataType(DataType.Date, ErrorMessage = "Niepoprawny format daty")]
         [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}")]
         public System.DateTime StartDate { get; set; }
 
-        [Display(Name = "Data zakończenia prac")]
+        [Display(Name = "Koniec prac")]
         [DataType(DataType.Date, ErrorMessage = "Niepoprawny format daty")]
         [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}")]
         public System.DateTime EndDate { get; set; }
@@ -46,7 +51,7 @@ namespace HRSDmgmt.Models
         [DefaultValue(true)]
         public bool Display { get; set; }
 
-        public int CompanyId { get; set; }
+        public int? CompanyId { get; set; }
         [ForeignKey("CompanyId")]
         public virtual Company? Company { get; set; }
 

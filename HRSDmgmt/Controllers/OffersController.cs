@@ -57,7 +57,7 @@ namespace HRSDmgmt.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("OfferId,Name,Description,Vacancy,StartDate,EndDate,Active,Display,CompanyId")] Offer offer)
+        public async Task<IActionResult> Create([Bind("OfferId,Name,Description,Vacancy,AddDate,StartDate,EndDate,Active,Display,CompanyId")] Offer offer)
         {
             if (ModelState.IsValid)
             {
@@ -82,7 +82,7 @@ namespace HRSDmgmt.Controllers
             {
                 return NotFound();
             }
-            ViewData["CompanyId"] = new SelectList(_context.Companies, "CompanyId", "Address", offer.CompanyId);
+            ViewData["CompanyId"] = new SelectList(_context.Companies, "CompanyId", "Name", offer.CompanyId);
             return View(offer);
         }
 
@@ -91,7 +91,7 @@ namespace HRSDmgmt.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("OfferId,Name,Description,Vacancy,StartDate,EndDate,Active,Display,CompanyId")] Offer offer)
+        public async Task<IActionResult> Edit(int id, [Bind("OfferId,Name,Description,Vacancy,AddDate,StartDate,EndDate,Active,Display,CompanyId")] Offer offer)
         {
             if (id != offer.OfferId)
             {
@@ -118,7 +118,7 @@ namespace HRSDmgmt.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CompanyId"] = new SelectList(_context.Companies, "CompanyId", "Address", offer.CompanyId);
+            ViewData["CompanyId"] = new SelectList(_context.Companies, "CompanyId", "Name", offer.CompanyId);
             return View(offer);
         }
 

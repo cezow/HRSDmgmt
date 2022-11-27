@@ -210,8 +210,9 @@ namespace HRSDmgmt.Data
                     var offer = new Models.Offer()
                         {
                             Name        = "Oferta",
-                            Description = "Umowa o pracę w firmie" + (i<=4 ? "Stocznia Gdańska" : "PolService"),
+                            Description = "Umowa o pracę w firmie " + (i<=4 ? "Stocznia Gdańska" : "PolService"),
                             Vacancy     = 2,
+                            AddDate     = DateTime.Now,
                             StartDate   = DateTime.Now.AddMonths(i),
                             EndDate     = DateTime.Now.AddMonths(i+12),
                             CompanyId   = i<=4 ? 1 : 2,

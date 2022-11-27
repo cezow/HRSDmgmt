@@ -32,11 +32,11 @@ namespace HRSDmgmt.Models
         [MaxLength(20, ErrorMessage = "Numer telefonu nie może być dłuższe niż 15 znaków")]
         public string? Mobile { get; set; }
 
-        [Display(Name = "Adres e-mail")]
+        [Display(Name = "E-mail")]
         [MaxLength(30, ErrorMessage = "Adres e-mail nie może być dłuższy niż 15 znaków")]
         public string? Email { get; set; }
 
-        [Display(Name = "Wykształcenie pracownika:")]
+        [Display(Name = "Wykształcenie")]
         [MaxLength(255, ErrorMessage = "Zbyt długi opis - skróć do 255 znaków")]
         public string? Education { get; set; }
 
