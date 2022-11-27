@@ -48,7 +48,7 @@ namespace HRSDmgmt.Models
         [MaxLength(30, ErrorMessage = "Adres e-mail nie może być dłuższy niż 15 znaków")]
         public string? Email { get; set; }
 
-        [DisplayName("Strona internetowa firmy")]
+        [DisplayName("www")]
         [MaxLength(30, ErrorMessage = "Adres strony wwww nie może być dłuższy niż 30 znaków")]
         public string? Www { get; set; }
 

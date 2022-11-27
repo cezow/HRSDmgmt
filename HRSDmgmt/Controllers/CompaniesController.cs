@@ -20,13 +20,16 @@ namespace HRSDmgmt.Controllers
             _context = context;
         }
 
+        [Authorize(Roles = "admin, user")]
         // GET: Companies
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Companies.ToListAsync());
+            return View(await _context.Companies.ToListAsync());
         }
 
+
         // GET: Companies/Details/5
+        [Authorize(Roles = "admin, user")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Companies == null)
@@ -45,6 +48,7 @@ namespace HRSDmgmt.Controllers
         }
 
         // GET: Companies/Create
+        [Authorize(Roles = "admin, user")]
         public IActionResult Create()
         {
             return View();
@@ -55,17 +59,18 @@ namespace HRSDmgmt.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CompanyId,Name,Description,Address,Country,ContactPerson,Mobile,Email,Logo,Active,Display")] Company company)
+        [Authorize(Roles = "admin, user")]
+        public async Task<IActionResult> Create([Bind("CompanyId,Name,NIP,Description,Address,Country,ContactPerson,Mobile,Email,Www,Active,Display")] Company company)
         {
             if (ModelState.IsValid)
             {
-                if (!CompanyNameExists(company.Name))
+                if (!CompanyNameExists(company.Name) || !CompanyNipExists(company.NIP))
                 {
                     _context.Add(company);
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));
                 }
-                else 
+                else
                 {
                     ViewBag.ErrorMessage = "Taka firma już istnieje w bazie";
                     return View("Create");
@@ -75,6 +80,7 @@ namespace HRSDmgmt.Controllers
         }
 
         // GET: Companies/Edit/5
+        [Authorize(Roles = "admin, user")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Companies == null)
@@ -95,7 +101,8 @@ namespace HRSDmgmt.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CompanyId,Name,Description,Address,Country,ContactPerson,Mobile,Email,Logo,Active,Display")] Company company)
+        [Authorize(Roles = "admin, user")]
+        public async Task<IActionResult> Edit(int id, [Bind("CompanyId,Name,NIP,Description,Address,Country,ContactPerson,Mobile,Email,Www,Active,Display")] Company company)
         {
             if (id != company.CompanyId)
             {
@@ -120,6 +127,7 @@ namespace HRSDmgmt.Controllers
                         throw;
                     }
                 }
+
                 return RedirectToAction(nameof(Index));
             }
             return View(company);
@@ -145,9 +153,9 @@ namespace HRSDmgmt.Controllers
         }
 
         // POST: Companies/Delete/5
-        [Authorize(Roles = "admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.Companies == null)
@@ -159,19 +167,24 @@ namespace HRSDmgmt.Controllers
             {
                 _context.Companies.Remove(company);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool CompanyExists(int id)
         {
-          return _context.Companies.Any(e => e.CompanyId == id);
+            return _context.Companies.Any(c => c.CompanyId == id);
         }
 
         private bool CompanyNameExists(string? name)
         {
             return (_context.Companies?.Any(c => c.Name == name)).GetValueOrDefault();
+        }
+
+        private bool CompanyNipExists(string? nip)
+        {
+            return (_context.Companies?.Any(c => c.NIP == nip)).GetValueOrDefault();
         }
     }
 }

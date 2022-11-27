@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 <div class="d-flex justify-content-center">
-<h1 class="d-inline-flex p-3 text-center text-secondary shadow-sm rounded-circle border-top border-white">FIRMY</h1>
+    <h1 class="d-inline-flex p-3 text-center text-secondary shadow-sm rounded-circle border-top border-white">FIRMY</h1>
 </div>
 
 <p>
@@ -12,7 +12,7 @@
 </p>
 
 
-<table class="table bg-white shadow rounded-4" >
+<table class="table bg-white shadow rounded-4">
     <thead class="bg-danger text-white">
         <tr>
             <th>
@@ -48,63 +48,63 @@
             <th>
                 @Html.DisplayNameFor(model => model.Display)
             </th>
-            <th style="width: 12%"></th>
+            <th style="width: 12%">ilość firm: @Model.Count()</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                <b>@Html.DisplayFor(modelItem => item.Name)</b>
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NIP)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Address)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Country)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ContactPerson)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Mobile)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Www)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Active)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Display)
-            </td>
-            <td>
-                <a class="btn btn-outline-primary btn-sm rounded-3 my-1" asp-action="Edit" asp-route-id="@item.CompanyId">
-                    <i class="bi-pen-fill"></i>
-                </a>
-                <a class="btn btn-outline-secondary btn-sm rounded-3 my-1" asp-action="Details" asp-route-id="@item.CompanyId">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <b>@Html.DisplayFor(modelItem => item.Name)</b>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NIP)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Country)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ContactPerson)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Mobile)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Www)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Active)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Display)
+                </td>
+                <td>
+                    <a class="btn btn-outline-primary btn-sm rounded-3 my-1" asp-action="Edit" asp-route-id="@item.CompanyId">
+                        <i class="bi-pen-fill"></i>
+                    </a>
+                    <a class="btn btn-outline-secondary btn-sm rounded-3 my-1" asp-action="Details" asp-route-id="@item.CompanyId">
                         <i class="bi-binoculars-fill"></i>
-                </a>
-                @{
-                    if (!User.IsInRole("admin"))
-                    {
+                    </a>
+                    @{
+                        if (User.IsInRole("admin"))
+                        {
                             <a class="btn btn-outline-danger btn-sm rounded-3 my-1" asp-action="Delete" asp-route-id="@item.CompanyId">
-                                    <i class="bi-trash3-fill"></i>
+                                <i class="bi-trash3-fill"></i>
                             </a>
-                    }   
-                }
-            </td>
-        </tr>
-}
+                        }
+                    }
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
-

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HRSDmgmt.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221123225400_1")]
+    [Migration("20221127114101_1")]
     partial class _1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -417,17 +417,12 @@ namespace HRSDmgmt.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<string>("Information")
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                    b.Property<bool>("IsCompany")
+                        .HasColumnType("bit");
 
                     b.Property<string>("LastName")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Photo")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
 
                     b.HasDiscriminator().HasValue("AppUser");
                 });
