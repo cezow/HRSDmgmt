@@ -9,9 +9,9 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
+<table class="table bg-white rounded-4 border shadow" id="oferty">
     <thead>
-        <tr>
+        <tr class="bg-warning text-secondary">
             <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
@@ -70,7 +70,7 @@
                 @Html.DisplayFor(modelItem => item.Display)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Company.Address)
+                @Html.DisplayFor(modelItem => item.Company.Name)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.OfferId">Edit</a> |
@@ -82,4 +82,36 @@
     </tbody>
 </table>
 
-                
+@section Scripts{
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.13.1/datatables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#oferty').DataTable({
+                language: {
+                    "decimal": "",
+                    "emptyTable": "Brak danych do wyświetlenia",
+                    "info": "Pozycje od _START_ do _END_ z _TOTAL_ rekordów",
+                    "infoEmpty": "Pozycji 0 z 0 dostępnych",
+                    "infoFiltered": "(filtrowanie z _MAX_ dostępnych pozycji)",
+                    "infoPostFix": "",
+                    "thousands": " ",
+                    "lengthMenu": "Pokaż _MENU_ pozycji",
+                    "loadingRecords": "Ładowanie...",
+                    "processing": "Przetwarzanie...",
+                    "search": "Wyszukaj:",
+                    "zeroRecords": "Nie znaleziono danych",
+                    "paginate": {
+                        "first": "Pierwsza",
+                        "last": "Ostatnia",
+                        "next": "Następna",
+                        "previous": "Poprzednia"
+                    },
+                    "aria": {
+                        "sortAscending": ": sortuje kolumnę rosnąco",
+                        "sortDescending": ": sortuje kolumnę malejąco"
+                    }
+                }
+            });
+        });
+    </script>
+}

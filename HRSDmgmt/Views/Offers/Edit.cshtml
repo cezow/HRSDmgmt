@@ -8,65 +8,71 @@
 
 <h4>Offer</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="OfferId" />
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Vacancy" class="control-label"></label>
-                <input asp-for="Vacancy" class="form-control" />
-                <span asp-validation-for="Vacancy" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AddDate" class="control-label"></label>
-                <input asp-for="AddDate" class="form-control" />
-                <span asp-validation-for="AddDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="StartDate" class="control-label"></label>
-                <input asp-for="StartDate" class="form-control" />
-                <span asp-validation-for="StartDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="EndDate" class="control-label"></label>
-                <input asp-for="EndDate" class="form-control" />
-                <span asp-validation-for="EndDate" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Active" /> @Html.DisplayNameFor(model => model.Active)
-                </label>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Display" /> @Html.DisplayNameFor(model => model.Display)
-                </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="CompanyId" class="control-label"></label>
-                <select asp-for="CompanyId" class="form-control" asp-items="ViewBag.CompanyId"></select>
-                <span asp-validation-for="CompanyId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <form asp-action="Edit">
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-4">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="OfferId" />
+                <div class="form-group m-3">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group m-3">
+                    <label asp-for="Description" class="control-label"></label>
+                    <input asp-for="Description" class="form-control" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="form-group m-3">
+                    <label asp-for="Vacancy" class="control-label"></label>
+                    <input asp-for="Vacancy" class="form-control" />
+                    <span asp-validation-for="Vacancy" class="text-danger"></span>
+                </div>
+                <div class="form-group m-3">
+                    <label asp-for="AddDate" class="control-label"></label>
+                    <input asp-for="AddDate" class="form-control" />
+                    <span asp-validation-for="AddDate" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group m-3">
+                    <label asp-for="StartDate" class="control-label"></label>
+                    <input asp-for="StartDate" class="form-control" />
+                    <span asp-validation-for="StartDate" class="text-danger"></span>
+                </div>
+                <div class="form-group m-3">
+                    <label asp-for="EndDate" class="control-label"></label>
+                    <input asp-for="EndDate" class="form-control" />
+                    <span asp-validation-for="EndDate" class="text-danger"></span>
+                </div>
+                <div class="form-group form-check m-3">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="Active" /> @Html.DisplayNameFor(model => model.Active)
+                    </label>
+                </div>
+                <div class="form-group form-check m-3">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="Display" /> @Html.DisplayNameFor(model => model.Display)
+                    </label>
+                </div>
+                <div class="form-group m-3">
+                    <label asp-for="CompanyId" class="control-label"></label>
+                    <select asp-for="CompanyId" class="form-control" asp-items="ViewBag.CompanyId"></select>
+                    <span asp-validation-for="CompanyId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center">
+                <div class="form-group mt-4 mx-2">
+                    <input type="submit" value="Zapisz" class="btn btn-primary rounded-5 shadow" />
+                </div>
+                <div class="mt-4 mx-2">
+                    <a asp-action="Index" class="btn btn-outline-secondary rounded-5 shadow">Powrót do listy</a>
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
 
 @section Scripts {

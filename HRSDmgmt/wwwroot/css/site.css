@@ -27,3 +27,18 @@ body {
 .hov:hover {
     color: black;
 }
+
+.ck-editor__editable {
+    min-height: 400px !important;
+}
+
+.modal-dialog {
+  
+    vertical-align: middle;
+}
+
+.modal-content {
+    width: 500px;
+} 
+
+          

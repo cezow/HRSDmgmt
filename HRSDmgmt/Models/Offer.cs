@@ -12,17 +12,17 @@ namespace HRSDmgmt.Models
         public int OfferId { get; set; }
 
         [Required(ErrorMessage = "Proszę podać nazwę firmy")]
-        [DisplayName("Firma")]
+        [DisplayName("Nazwa/Firma")]
         [MaxLength(30, ErrorMessage = "Nazwa oferty nie może być dłuższa niż 30 znaków")]
         public string? Name { get; set; }
 
         [Required(ErrorMessage = "Proszę podać opis oferty")]
-        [Display(Name = "Opis zlecenia:")]
+        [Display(Name = "Opis zlecenia")]
         [MaxLength(255, ErrorMessage = "Opis oferty nie może być dłuższy niż 255 znaków")]
         public string? Description { get; set; }
 
         [Required]
-        [DisplayName("Ilość poszukiwanych pracowników na stanowisko")]
+        [DisplayName("Ilość wakatów")]
         public int Vacancy { get; set; }
 
         [Display(Name = "Publikacja")]
@@ -47,7 +47,7 @@ namespace HRSDmgmt.Models
         public bool Active { get; set; }
 
         [Required]
-        [DisplayName("Czy wyświetlać?")]
+        [DisplayName("*Akceptuję")]
         [DefaultValue(true)]
         public bool Display { get; set; }
 
