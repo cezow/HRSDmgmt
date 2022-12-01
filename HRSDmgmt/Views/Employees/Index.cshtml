@@ -40,7 +40,10 @@
                 @Html.DisplayNameFor(model => model.CV)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.User)
+                @Html.DisplayNameFor(model => model.Working)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Offer)
             </th>
             <th></th>
         </tr>
@@ -76,7 +79,10 @@
                 @Html.DisplayFor(modelItem => item.CV)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.User.Id)
+                @Html.DisplayFor(modelItem => item.Working)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Offer.Description)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.EmployeeId">Edit</a> |

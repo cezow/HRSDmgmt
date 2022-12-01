@@ -53,14 +53,14 @@ namespace HRSDmgmt.Data
                 .WithOne(u => u.Company)
                 .OnDelete(DeleteBehavior.Restrict); 
 
-            modelBuilder.Entity<AppUser>()
-                .HasOne(u => u.Employee)
-                .WithOne(e => e.User)
+            modelBuilder.Entity<Offer>()
+                .HasMany(o => o.Employees)
+                .WithOne(e => e.Offer)
                 .OnDelete(DeleteBehavior.Restrict); 
 
             modelBuilder.Entity<Employee>()
-                .HasOne(e => e.User)
-                .WithOne(u => u.Employee)
+                .HasOne(e => e.Offer)
+                .WithMany(o => o.Employees)
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }

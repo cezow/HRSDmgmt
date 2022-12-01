@@ -57,10 +57,15 @@ namespace HRSDmgmt.Models
         [MaxLength(128)]
         public string? CV { get; set; }
 
-        [DisplayName("AppUserID")]
-        public string? Id { get; set; }
+        [Required]
+        [DisplayName("Pracuje?")]
+        [DefaultValue(false)]
+        public bool Working { get; set; }
 
-        [ForeignKey("Id")]
-        public virtual AppUser? User { get; set; }
+        [DisplayName("Oferta")]
+        public int? OfferId { get; set; }
+
+        [ForeignKey("OfferId")]
+        public virtual Offer? Offer { get; set; }
     }
 }
