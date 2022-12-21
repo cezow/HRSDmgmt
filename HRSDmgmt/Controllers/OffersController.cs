@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HRSDmgmt.Data;
 using HRSDmgmt.Models;
+using Microsoft.AspNetCore.Routing.Matching;
 
 namespace HRSDmgmt.Controllers
 {
@@ -29,6 +30,10 @@ namespace HRSDmgmt.Controllers
         // GET: Offers/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            var Candidates =  _context.Offers.Where(o => o.OfferId == id).ToList();
+
+            ViewBag.Candidates = Candidates;
+
             if (id == null || _context.Offers == null)
             {
                 return NotFound();

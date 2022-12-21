@@ -20,10 +20,18 @@ namespace HRSDmgmt.Controllers
         }
 
         // GET: Employees
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? id)
         {
-            var applicationDbContext = _context.Employees.Include(e => e.Offer);
-            return View(await applicationDbContext.ToListAsync());
+            if (id == null)
+            {
+                var applicationDbContext = _context.Employees.Include(e => e.Offer);
+                return View(await applicationDbContext.ToListAsync());
+            }
+            else
+            {
+                var applicationDbContext = _context.Employees.Include(e => e.Offer).Where(e => e.OfferId == id);
+                return View(await applicationDbContext.ToListAsync());
+            }
         }
 
         // GET: Employees/Details/5

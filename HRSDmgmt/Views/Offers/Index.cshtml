@@ -7,7 +7,7 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-outline-primary rounded-5">Nowe zlecenie</a>
 </p>
 <table class="table bg-white rounded-4 border shadow" id="oferty">
     <thead>
@@ -76,6 +76,9 @@
                 <a asp-action="Edit" asp-route-id="@item.OfferId">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.OfferId">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.OfferId">Delete</a>
+                    <a class="btn btn-outline-info rounded-5 my-1" title="Kandydaci" asp-action="Index" asp-controller="Employees" asp-route-id="@item.OfferId">
+                        <i class="bi bi-person-fill"></i>
+                    </a>
             </td>
         </tr>
 }
