@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewData["Title"] = "Jobs";
+}
+
+<h1>Jobs</h1>
+
+
+@using(Html.BeginForm("Jobs", "Home", FormMethod.Post, new {enctype = "multipart/form-data"}))
+{
+    <div class="mb-5">
+        <div class="row">
+            <div class="form-group col-md-4">
+                <input type="text" placeholder="numer referencji..." class="form-control" name="Referencja" />
+            </div>
+            <div class="form-group col-md-2">
+                <input type="file" class="form-control" name="userAttachment" required/>
+            </div>
+            <div class="form-group col-md-6">
+                <input type="submit" value="Wyślij CV" class="btn btn-success"/>
+            </div>
+        </div>
+
+        @if (ViewBag.alert != null)
+        {
+            <div class="alert alert-info  text-center">
+                <label>@ViewBag.info</label>
+            </div>
+        }
+    </div>
+}
+
+
+
+<div>
+    <h2>Monter (nr ref. <b>123</b>)</h2>
+    <p>Poszukiwany monter konstrukcji stalowych</p>
+</div>

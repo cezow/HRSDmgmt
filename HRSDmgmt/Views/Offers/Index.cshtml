@@ -7,11 +7,11 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create" class="btn btn-outline-primary rounded-5">Nowe zlecenie</a>
+    <a asp-action="Create">Create New</a>
 </p>
-<table class="table bg-white rounded-4 border shadow" id="oferty">
+<table class="table">
     <thead>
-        <tr class="bg-warning text-secondary">
+        <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
@@ -70,51 +70,14 @@
                 @Html.DisplayFor(modelItem => item.Display)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Company.Name)
+                @Html.DisplayFor(modelItem => item.Company.Address)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.OfferId">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.OfferId">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.OfferId">Delete</a>
-                    <a class="btn btn-outline-info rounded-5 my-1" title="Kandydaci" asp-action="Index" asp-controller="Employees" asp-route-id="@item.OfferId">
-                        <i class="bi bi-person-fill"></i>
-                    </a>
             </td>
         </tr>
 }
     </tbody>
 </table>
-
-@section Scripts{
-    <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.13.1/datatables.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('#oferty').DataTable({
-                language: {
-                    "decimal": "",
-                    "emptyTable": "Brak danych do wyświetlenia",
-                    "info": "Pozycje od _START_ do _END_ z _TOTAL_ rekordów",
-                    "infoEmpty": "Pozycji 0 z 0 dostępnych",
-                    "infoFiltered": "(filtrowanie z _MAX_ dostępnych pozycji)",
-                    "infoPostFix": "",
-                    "thousands": " ",
-                    "lengthMenu": "Pokaż _MENU_ pozycji",
-                    "loadingRecords": "Ładowanie...",
-                    "processing": "Przetwarzanie...",
-                    "search": "Wyszukaj:",
-                    "zeroRecords": "Nie znaleziono danych",
-                    "paginate": {
-                        "first": "Pierwsza",
-                        "last": "Ostatnia",
-                        "next": "Następna",
-                        "previous": "Poprzednia"
-                    },
-                    "aria": {
-                        "sortAscending": ": sortuje kolumnę rosnąco",
-                        "sortDescending": ": sortuje kolumnę malejąco"
-                    }
-                }
-            });
-        });
-    </script>
-}

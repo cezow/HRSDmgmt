@@ -20,18 +20,9 @@ namespace HRSDmgmt.Controllers
         }
 
         // GET: Employees
-        public async Task<IActionResult> Index(int? id)
+        public async Task<IActionResult> Index()
         {
-            if (id == null)
-            {
-                var applicationDbContext = _context.Employees.Include(e => e.Offer);
-                return View(await applicationDbContext.ToListAsync());
-            }
-            else
-            {
-                var applicationDbContext = _context.Employees.Include(e => e.Offer).Where(e => e.OfferId == id);
-                return View(await applicationDbContext.ToListAsync());
-            }
+              return View(await _context.Employees.ToListAsync());
         }
 
         // GET: Employees/Details/5
@@ -43,7 +34,6 @@ namespace HRSDmgmt.Controllers
             }
 
             var employee = await _context.Employees
-                .Include(e => e.Offer)
                 .FirstOrDefaultAsync(m => m.EmployeeId == id);
             if (employee == null)
             {
@@ -56,7 +46,6 @@ namespace HRSDmgmt.Controllers
         // GET: Employees/Create
         public IActionResult Create()
         {
-            ViewData["OfferId"] = new SelectList(_context.Offers, "OfferId", "Description");
             return View();
         }
 
@@ -65,7 +54,7 @@ namespace HRSDmgmt.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("EmployeeId,FirstName,LastName,Mobile,Email,Education,Profession,Skills,Experience,CV,Working,OfferId")] Employee employee)
+        public async Task<IActionResult> Create([Bind("EmployeeId,FirstName,LastName,Mobile,Email,Education,Profession,Skills,Experience,CV,Working")] Employee employee)
         {
             if (ModelState.IsValid)
             {
@@ -73,7 +62,6 @@ namespace HRSDmgmt.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["OfferId"] = new SelectList(_context.Offers, "OfferId", "Description", employee.OfferId);
             return View(employee);
         }
 
@@ -90,7 +78,6 @@ namespace HRSDmgmt.Controllers
             {
                 return NotFound();
             }
-            ViewData["OfferId"] = new SelectList(_context.Offers, "OfferId", "Description", employee.OfferId);
             return View(employee);
         }
 
@@ -99,7 +86,7 @@ namespace HRSDmgmt.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("EmployeeId,FirstName,LastName,Mobile,Email,Education,Profession,Skills,Experience,CV,Working,OfferId")] Employee employee)
+        public async Task<IActionResult> Edit(int id, [Bind("EmployeeId,FirstName,LastName,Mobile,Email,Education,Profession,Skills,Experience,CV,Working")] Employee employee)
         {
             if (id != employee.EmployeeId)
             {
@@ -126,7 +113,6 @@ namespace HRSDmgmt.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["OfferId"] = new SelectList(_context.Offers, "OfferId", "Description", employee.OfferId);
             return View(employee);
         }
 
@@ -139,7 +125,6 @@ namespace HRSDmgmt.Controllers
             }
 
             var employee = await _context.Employees
-                .Include(e => e.Offer)
                 .FirstOrDefaultAsync(m => m.EmployeeId == id);
             if (employee == null)
             {

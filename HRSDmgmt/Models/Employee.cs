@@ -62,10 +62,6 @@ namespace HRSDmgmt.Models
         [DefaultValue(false)]
         public bool Working { get; set; }
 
-        [DisplayName("Oferta")]
-        public int? OfferId { get; set; }
-
-        [ForeignKey("OfferId")]
-        public virtual Offer? Offer { get; set; }
+        public virtual ICollection<Candidate>? Candidates { get; set; }
     }
 }

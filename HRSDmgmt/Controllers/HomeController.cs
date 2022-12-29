@@ -3,6 +3,7 @@ using HRSDmgmt.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
+using System.Net.Mail;
 
 namespace HRSDmgmt.Controllers
 {
@@ -19,6 +20,43 @@ namespace HRSDmgmt.Controllers
 
         public IActionResult Index()
         {
+            return View();
+        }
+
+        public IActionResult Jobs()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Jobs(string Referencja, IFormFile userAttachment)
+        {
+            MailMessage message = new MailMessage(new MailAddress("humberto.sporer@ethereal.email"), new MailAddress("humberto.sporer@ethereal.email"));
+            message.Subject = "Aplikacja na stanowisko, ref: " + Referencja;
+            message.Body = "CV kandydata w załączeniu";
+            message.IsBodyHtml = false;
+            message.Attachments.Add(new Attachment(userAttachment.OpenReadStream(), userAttachment.FileName));
+
+            SmtpClient smtp = new SmtpClient();
+            smtp.Host = "smtp.ethereal.email";
+            smtp.Port = 587;
+            smtp.EnableSsl = true;
+            smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+
+            System.Net.NetworkCredential credential = new System.Net.NetworkCredential();
+            // https://ethereal.email/login strona logowania
+            credential.UserName = "humberto.sporer@ethereal.email";
+            credential.Password = "aHX79rZ6jqvrdXQMwB";
+            // https://ethereal.email/messages skrzynka pocztowa
+
+            smtp.UseDefaultCredentials = false;
+            smtp.Credentials = credential;
+
+            smtp.Send(message);
+
+            ViewBag.info = "CV zostało wysłane";
+
             return View();
         }
 
