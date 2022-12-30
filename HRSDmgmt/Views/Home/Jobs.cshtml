@@ -3,36 +3,83 @@
     ViewData["Title"] = "Jobs";
 }
 
-<h1>Jobs</h1>
+<h2 class="text-secondary mt-2">Oferty pracy</h2>
+<hr/>
 
+<div class="d-flex justify-content-center">
+    <div class="d-flex flex-column">
 
-@using(Html.BeginForm("Jobs", "Home", FormMethod.Post, new {enctype = "multipart/form-data"}))
-{
-    <div class="mb-5">
-        <div class="row">
-            <div class="form-group col-md-4">
-                <input type="text" placeholder="numer referencji..." class="form-control" name="Referencja" />
-            </div>
-            <div class="form-group col-md-2">
-                <input type="file" class="form-control" name="userAttachment" required/>
-            </div>
-            <div class="form-group col-md-6">
-                <input type="submit" value="Wyślij CV" class="btn btn-success"/>
-            </div>
-        </div>
+        @if (User.Identity.IsAuthenticated) 
+        { 
+        <p>Chcą aplikować na dane stanowisko zapoznaj się i zaakceptuj regulamin, wprowadź numer referencyjny oferty, załącz CV i wyślij</p>
+         
+        
+            @using(Html.BeginForm("Jobs", "Home", FormMethod.Post, new {enctype = "multipart/form-data"}))
+            {
+                <div class="mb-4">
+                    <div class="text-center mb-2">
+                        <input type="checkbox" required /> Akcetuję <a asp-action="Privacy" asp-controller="Home">Regulamin</a>
+                    </div>
+                    <div class="row justify-content-around">
+                        <div class="form-group col-md-3 m-1">
+                            <input type="text" placeholder="numer referencyjny..." class="form-control" name="Referencja" required/>
+                        </div>
+                            <div class="form-group col-md-6 m-1">
+                            <input type="file" class="form-control" name="userAttachment" required accept=".pdf, .docx"/>
+                        </div>
+                            <div class="form-group col-md-2 m-1">
+                            <input type="submit" value="Wyślij CV" class="btn btn-success"/>
+                        </div>
+                    </div>
 
-        @if (ViewBag.alert != null)
-        {
-            <div class="alert alert-info  text-center">
-                <label>@ViewBag.info</label>
-            </div>
+                    @if (ViewBag.info != null)
+                    {
+                            <div class="alert alert-info  text-center"><b>@ViewBag.info</b></div>
+                    }
+                </div>
+            }
+        
         }
+        else 
+        {
+            <p>Chcą aplikować na dane stanowisko zaloguj się</p>
+        }
+        
     </div>
-}
+</div>
 
+<div class="row justify-content-around">
+    <div class="col-md-5 m-3 border shadow text-center rounded-5 bg-white">
+        <h2>Monter </h2>
+        <h5>Nr referencyjny oferty: <b>123</b></h5>
+        <hr />
+        <p>Poszukiwany monter konstrukcji stalowych</p>
+        <p><u>Wymagania:</u></p>
+        <ul style="list-style-type: none;">
+            <li>- 2 lata doświadcznia</li>
+            <li>- znajomość rysunku technicznego</li>
+        </ul>
+        <p><u>Oferujemy:</u></p>
+        <ul style="list-style-type: none;">
+            <li>- umowę o pracę</li>
+            <li>- stawki w zalezności od doświadczenia</li>
+        </ul>
+    </div>
 
-
-<div>
-    <h2>Monter (nr ref. <b>123</b>)</h2>
-    <p>Poszukiwany monter konstrukcji stalowych</p>
+    <div class="col-md-5 m-3 border shadow text-center rounded-5 bg-white">
+        <h2>Spawacz</h2>
+        <h5>Nr referencyjny oferty: <b>127</b></h5>
+        <hr />
+        <p>Poszukiwany spawacz TIG 141</p>
+        <p><u>Wymagania:</u></p>
+        <ul style="list-style-type: none;">
+            <li>- 3 lata doświadcznia</li>
+            <li>- certyfikat UDT</li>
+        </ul>
+        <p><u>Oferujemy:</u></p>
+        <ul style="list-style-type: none;">
+            <li>- umowę o pracę</li>
+            <li>- stawki w zalezności od doświadczenia</li>
+        </ul>
+    </div>
 </div>
