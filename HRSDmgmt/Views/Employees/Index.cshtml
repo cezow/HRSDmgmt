@@ -4,14 +4,19 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<div class="d-flex justify-content-center">
+    <h1 class="d-inline-flex p-3 text-center text-secondary shadow-sm rounded-circle border-top border-white">PRACOWNICY</h1>
+</div>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-outline-primary rounded-5">Utwórz pracownika</a>
 </p>
-<table class="table">
-    <thead>
+<table class="table col-md-12 border shadow rounded-5 bg-white" id="tabela">
+    <thead class="bg-success  text-white">
         <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeeId)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.FirstName)
             </th>
@@ -34,12 +39,6 @@
                 @Html.DisplayNameFor(model => model.Skills)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Experience)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CV)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Working)
             </th>
             <th></th>
@@ -48,6 +47,8 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmployeeId)
             <td>
                 @Html.DisplayFor(modelItem => item.FirstName)
             </td>
@@ -70,20 +71,55 @@
                 @Html.DisplayFor(modelItem => item.Skills)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Experience)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CV)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Working)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.EmployeeId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.EmployeeId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.EmployeeId">Delete</a>
+                <a class="btn btn-outline-primary btn-sm rounded-3 my-1" asp-action="Edit" asp-route-id="@item.EmployeeId">
+                    <i class="bi-pen-fill"></i>
+                </a>
+                <a class="btn btn-outline-secondary btn-sm rounded-3 my-1" asp-action="Details" asp-route-id="@item.EmployeeId">
+                    <i class="bi-binoculars-fill"></i>
+                </a>
+
+                <a class="btn btn-outline-danger btn-sm rounded-3 my-1" asp-action="Delete" asp-route-id="@item.EmployeeId">
+                    <i class="bi-trash3-fill"></i>
+                </a>
             </td>
         </tr>
 }
     </tbody>
 </table>
+
+@section Scripts{
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.13.1/datatables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#tabela').DataTable({
+                language: {
+                    "decimal": "",
+                    "emptyTable": "Brak danych",
+                    "info": "Pozycje od _START_ do _END_ z _TOTAL_ rekordów",
+                    "infoEmpty": "Pozycji 0 z 0 dostępnych",
+                    "infoFiltered": "(filtrowanie z _MAX_ dostępnych pozycji)",
+                    "infoPostFix": "",
+                    "thousands": " ",
+                    "lengthMenu": "Pokaż _MENU_ pozycji",
+                    "loadingRecords": "Ładowanie...",
+                    "processing": "Przetwarzanie...",
+                    "search": "Wyszukaj:",
+                    "zeroRecords": "Nie znaleziono danych",
+                    "paginate": {
+                        "first": "Pierwsza",
+                        "last": "Ostatnia",
+                        "next": "Następna",
+                        "previous": "Poprzednia"
+                    },
+                    "aria": {
+                        "sortAscending": ": sortuje kolumnę rosnąco",
+                        "sortDescending": ": sortuje kolumnę malejąco"
+                    }
+                }
+            });
+        });
+    </script>
+}

@@ -8,7 +8,7 @@ namespace HRSDmgmt.Models
         public class Offer
         {
             [Key]
-            [DisplayName("Identyfikator oferty")]
+            [DisplayName("Id")]
             public int OfferId { get; set; }
 
             [Required(ErrorMessage = "Proszę podać nazwę firmy")]
