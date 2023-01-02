@@ -4,9 +4,8 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
 
-<h4>Candidate</h4>
+<h4 class="text-secondary">Kandydat</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -30,6 +29,12 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
+
+@if (ViewBag.error != null)
+    {
+        <div class="alert alert-info d-inline-block">@ViewBag.error</div>
+    }
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

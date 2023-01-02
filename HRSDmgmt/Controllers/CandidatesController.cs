@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HRSDmgmt.Data;
 using HRSDmgmt.Models;
+using System.Xml.Linq;
 
 namespace HRSDmgmt.Controllers
 {
@@ -61,11 +62,15 @@ namespace HRSDmgmt.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("CandidateId,OfferId,EmployeeId")] Candidate candidate)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && !SameCandidateExists(candidate))
             {
                 _context.Add(candidate);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                ViewBag.error = "Ten kandydat juz jest przypisany do tej oferty pracy!";
             }
             ViewData["EmployeeId"] = new SelectList(_context.Employees, "EmployeeId", "FirstName", candidate.EmployeeId);
             ViewData["OfferId"] = new SelectList(_context.Offers, "OfferId", "Description", candidate.OfferId);
@@ -169,6 +174,11 @@ namespace HRSDmgmt.Controllers
         private bool CandidateExists(int id)
         {
           return _context.Candidate.Any(e => e.CandidateId == id);
+        }
+
+        private bool SameCandidateExists(Candidate newCandidate)
+        {
+            return _context.Candidate.Any(e => e.OfferId == newCandidate.OfferId && e.EmployeeId == newCandidate.EmployeeId);
         }
     }
 }
