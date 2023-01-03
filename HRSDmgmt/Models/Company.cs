@@ -7,7 +7,7 @@ namespace HRSDmgmt.Models
     public class Company
     {
         [Key]
-        [DisplayName("Identifikator firmy")]
+        [DisplayName("Id")]
         public int CompanyId { get; set; }
 
         [Required(ErrorMessage = "Proszę podać nazwę firmy")]
