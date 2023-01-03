@@ -5,35 +5,43 @@
 }
 
 
-<h4 class="text-secondary">Kandydat</h4>
+<h4 class="text-secondary mt-2">Kandydat</h4>
 <hr />
-<div class="row">
+<div class="d-flex justify-content-center">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="OfferId" class="control-label"></label>
+            <div class="form-group mt-2">
+                <label asp-for="OfferId" class="control-label text-secondary"></label>
                 <select asp-for="OfferId" class ="form-control" asp-items="ViewBag.OfferId"></select>
             </div>
-            <div class="form-group">
-                <label asp-for="EmployeeId" class="control-label"></label>
+            <div class="form-group mt-2">
+                <label asp-for="EmployeeId" class="control-label text-secondary"></label>
                 <select asp-for="EmployeeId" class ="form-control" asp-items="ViewBag.EmployeeId"></select>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div class="d-flex justify-content-around mt-3">
+                <div class="form-group">
+                    <input type="submit" value="Utwórz" class="btn btn-primary rounded-5" />
+                </div>
+                <div class="form-group">
+                    <a asp-action="Index" class="btn btn-outline-secondary rounded-5">Anuluj</a>
+                </div>
             </div>
+            @if (ViewBag.error != null)
+            {
+                <div class="d-flex justify-content-around mt-3">
+                    <div class="alert alert-info d-inline-block">
+                        <b>@ViewBag.error</b>
+                    </div>
+                </div>
+            }
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
-@if (ViewBag.error != null)
-    {
-        <div class="alert alert-info d-inline-block">@ViewBag.error</div>
-    }
+
+
 
 
 @section Scripts {

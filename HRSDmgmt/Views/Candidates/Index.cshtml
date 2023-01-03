@@ -12,7 +12,7 @@
     <a asp-action="Create" class="btn btn-outline-primary rounded-5">Dodaj kandydata</a>
 </p>
 <table class="table border shadow rounded-5" id="tabela">
-    <thead>
+    <thead class="bg-secondary text-white">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Offer)
@@ -27,10 +27,10 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Offer.Description)
+                   id @Html.DisplayFor(modelItem => item.Offer.OfferId): @Html.DisplayFor(modelItem => item.Offer.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Employee.FullName)
+                   id @Html.DisplayFor(modelItem => item.Employee.EmployeeId): @Html.DisplayFor(modelItem => item.Employee.FullName)
             </td>
             <td>
             <a class="btn btn-outline-primary btn-sm rounded-3 my-1" asp-action="Edit" asp-route-id="@item.CandidateId">

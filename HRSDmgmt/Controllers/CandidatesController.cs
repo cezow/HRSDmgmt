@@ -50,8 +50,8 @@ namespace HRSDmgmt.Controllers
         // GET: Candidates/Create
         public IActionResult Create()
         {
-            ViewData["EmployeeId"] = new SelectList(_context.Employees, "EmployeeId", "FirstName");
-            ViewData["OfferId"] = new SelectList(_context.Offers, "OfferId", "Description");
+            ViewData["EmployeeId"] = new SelectList(_context.Employees, "EmployeeId", "EmployeeId");
+            ViewData["OfferId"] = new SelectList(_context.Offers, "OfferId", "OfferId");
             return View();
         }
 
@@ -72,8 +72,8 @@ namespace HRSDmgmt.Controllers
             {
                 ViewBag.error = "Ten kandydat juz jest przypisany do tej oferty pracy!";
             }
-            ViewData["EmployeeId"] = new SelectList(_context.Employees, "EmployeeId", "FirstName", candidate.EmployeeId);
-            ViewData["OfferId"] = new SelectList(_context.Offers, "OfferId", "Description", candidate.OfferId);
+            ViewData["EmployeeId"] = new SelectList(_context.Employees, "EmployeeId", "EmployeeId", candidate.EmployeeId);
+            ViewData["OfferId"] = new SelectList(_context.Offers, "OfferId", "OfferId", candidate.OfferId);
             return View(candidate);
         }
 
@@ -90,8 +90,8 @@ namespace HRSDmgmt.Controllers
             {
                 return NotFound();
             }
-            ViewData["EmployeeId"] = new SelectList(_context.Employees, "EmployeeId", "FirstName", candidate.EmployeeId);
-            ViewData["OfferId"] = new SelectList(_context.Offers, "OfferId", "Description", candidate.OfferId);
+            ViewData["EmployeeId"] = new SelectList(_context.Employees, "EmployeeId", "EmployeeId", candidate.EmployeeId);
+            ViewData["OfferId"] = new SelectList(_context.Offers, "OfferId", "OfferId", candidate.OfferId);
             return View(candidate);
         }
 
@@ -127,8 +127,8 @@ namespace HRSDmgmt.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EmployeeId"] = new SelectList(_context.Employees, "EmployeeId", "FirstName", candidate.EmployeeId);
-            ViewData["OfferId"] = new SelectList(_context.Offers, "OfferId", "Description", candidate.OfferId);
+            ViewData["EmployeeId"] = new SelectList(_context.Employees, "EmployeeId", "EmployeeId", candidate.EmployeeId);
+            ViewData["OfferId"] = new SelectList(_context.Offers, "OfferId", "OfferId", candidate.OfferId);
             return View(candidate);
         }
 

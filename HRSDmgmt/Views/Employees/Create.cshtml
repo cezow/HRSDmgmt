@@ -5,58 +5,58 @@
 }
 
 
-<h4 class="text-secondary">Nowy pracownik</h4>
+<h4 class="text-secondary mt-2">Nowy pracownik</h4>
 <hr />
 <div class="row d-flex justify-content-center">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="FirstName" class="control-label"></label>
+            <div class="form-group mb-2">
+                <label asp-for="FirstName" class="control-label text-secondary"></label>
                 <input asp-for="FirstName" class="form-control" />
                 <span asp-validation-for="FirstName" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="LastName" class="control-label"></label>
+            <div class="form-group mb-2">
+                <label asp-for="LastName" class="control-label text-secondary"></label>
                 <input asp-for="LastName" class="form-control" />
                 <span asp-validation-for="LastName" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Mobile" class="control-label"></label>
+            <div class="form-group mb-2">
+                <label asp-for="Mobile" class="control-label text-secondary"></label>
                 <input asp-for="Mobile" class="form-control" />
                 <span asp-validation-for="Mobile" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
+            <div class="form-group mb-2">
+                <label asp-for="Email" class="control-label text-secondary"></label>
                 <input asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Education" class="control-label"></label>
+            <div class="form-group mb-2">
+                <label asp-for="Education" class="control-label text-secondary"></label>
                 <input asp-for="Education" class="form-control" />
                 <span asp-validation-for="Education" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Profession" class="control-label"></label>
+            <div class="form-group mb-2">
+                <label asp-for="Profession" class="control-label text-secondary"></label>
                 <input asp-for="Profession" class="form-control" />
                 <span asp-validation-for="Profession" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Skills" class="control-label"></label>
+            <div class="form-group mb-2">
+                <label asp-for="Skills" class="control-label text-secondary"></label>
                 <input asp-for="Skills" class="form-control" />
                 <span asp-validation-for="Skills" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Experience" class="control-label"></label>
+            <div class="form-group mb-2">
+                <label asp-for="Experience" class="control-label text-secondary"></label>
                 <input asp-for="Experience" class="form-control" />
                 <span asp-validation-for="Experience" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="CV" class="control-label"></label>
+            <div class="form-group mb-2">
+                <label asp-for="CV" class="control-label text-secondary"></label>
                 <input asp-for="CV" class="form-control" />
                 <span asp-validation-for="CV" class="text-danger"></span>
             </div>
-            <div class="form-group form-check">
+            <div class="form-group form-check mb-2">
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="Working" /> @Html.DisplayNameFor(model => model.Working)
                 </label>
