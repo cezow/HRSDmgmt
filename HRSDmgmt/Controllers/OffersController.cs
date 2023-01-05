@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HRSDmgmt.Data;
 using HRSDmgmt.Models;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace HRSDmgmt.Controllers
 {
@@ -20,13 +22,23 @@ namespace HRSDmgmt.Controllers
         }
 
         // GET: Offers
+        [Authorize(Roles = "admin")]
+        public async Task<IActionResult> IndexForAdmin()
+        {
+            var applicationDbContext = _context.Offers.Include(o => o.Company).Where(o => o.Active == false);
+            return View(await applicationDbContext.ToListAsync());
+        }
+
+        // GET: Offers
+        [Authorize(Roles = "admin, user")]
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Offers.Include(o => o.Company);
+            var applicationDbContext = _context.Offers.Include(o => o.Company).Where(o => o.Active == true);
             return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Offers/Details/5
+        [Authorize(Roles = "admin, user")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Offers == null)
@@ -52,9 +64,10 @@ namespace HRSDmgmt.Controllers
         }
 
         // GET: Offers/Create
+      
         public IActionResult Create()
         {
-            ViewData["CompanyId"] = new SelectList(_context.Companies, "CompanyId", "Address");
+            ViewData["CompanyId"] = new SelectList(_context.Companies, "CompanyId", "Name");
             return View();
         }
 
@@ -71,11 +84,12 @@ namespace HRSDmgmt.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CompanyId"] = new SelectList(_context.Companies, "CompanyId", "Address", offer.CompanyId);
+            ViewData["CompanyId"] = new SelectList(_context.Companies.Where(c => c.Active == true), "CompanyId", "Name", offer.CompanyId);
             return View(offer);
         }
 
         // GET: Offers/Edit/5
+        [Authorize(Roles = "admin, user")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Offers == null)
@@ -88,7 +102,8 @@ namespace HRSDmgmt.Controllers
             {
                 return NotFound();
             }
-            ViewData["CompanyId"] = new SelectList(_context.Companies, "CompanyId", "Address", offer.CompanyId);
+            ViewData["CompanyId"] = new SelectList(_context.Companies.Where(c => c.Active == true), "CompanyId", "Name", offer.CompanyId);
+
             return View(offer);
         }
 
@@ -97,6 +112,7 @@ namespace HRSDmgmt.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin, user")]
         public async Task<IActionResult> Edit(int id, [Bind("OfferId,Name,Description,Vacancy,AddDate,StartDate,EndDate,Active,Display,CompanyId")] Offer offer)
         {
             if (id != offer.OfferId)
@@ -124,11 +140,12 @@ namespace HRSDmgmt.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CompanyId"] = new SelectList(_context.Companies, "CompanyId", "Address", offer.CompanyId);
+            ViewData["CompanyId"] = new SelectList(_context.Companies.Where(c => c.Active == true), "CompanyId", "Name", offer.CompanyId);
             return View(offer);
         }
 
         // GET: Offers/Delete/5
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Offers == null)
@@ -150,6 +167,7 @@ namespace HRSDmgmt.Controllers
         // POST: Offers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.Offers == null)

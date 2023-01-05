@@ -28,6 +28,11 @@ namespace HRSDmgmt.Controllers
             return View();
         }
 
+        public IActionResult About()
+        {
+            return View();
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Jobs(string Referencja, IFormFile userAttachment)

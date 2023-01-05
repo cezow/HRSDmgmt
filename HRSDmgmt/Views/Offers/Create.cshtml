@@ -4,68 +4,76 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
 
-<h4>Offer</h4>
+<h4 class="text-secondary mt-2">Zlecenia</h4>
 <hr />
-<div class="row">
+
+<div class="d-flex justify-content-center">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
+            <div class="form-group mt-2">
+                <label asp-for="Name" class="control-label text-secondary"></label>
+                <textarea asp-for="Name" class="form-control" ></textarea>
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
+            <div class="form-group mt-2">
+                <label asp-for="Description" class="control-label text-secondary"></label>
+                <textarea asp-for="Description" class="form-control" ></textarea>
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Vacancy" class="control-label"></label>
+            <div class="form-group mt-2">
+                <label asp-for="Vacancy" class="control-label text-secondary"></label>
                 <input asp-for="Vacancy" class="form-control" />
                 <span asp-validation-for="Vacancy" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="AddDate" class="control-label"></label>
+            <div class="form-group mt-2">
+                <label asp-for="AddDate" class="control-label text-secondary"></label>
                 <input asp-for="AddDate" class="form-control" />
                 <span asp-validation-for="AddDate" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="StartDate" class="control-label"></label>
+            <div class="form-group mt-2">
+                <label asp-for="StartDate" class="control-label text-secondary"></label>
                 <input asp-for="StartDate" class="form-control" />
                 <span asp-validation-for="StartDate" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="EndDate" class="control-label"></label>
+            <div class="form-group mt-2">
+                <label asp-for="EndDate" class="control-label text-secondary"></label>
                 <input asp-for="EndDate" class="form-control" />
                 <span asp-validation-for="EndDate" class="text-danger"></span>
             </div>
-            <div class="form-group form-check">
+            @if (User.IsInRole("admin"))
+            {
+                <div class="form-group form-check mt-2">
+                    <label class="form-check-label text-secondary">
+                        <input class="form-check-input" asp-for="Active" /> @Html.DisplayNameFor(model => model.Active)
+                    </label>
+                </div>
+            }
+            @if (User.IsInRole("admin") || User.IsInRole("user"))
+            {
+                <div class="form-group mt-2">
+                    <label asp-for="CompanyId" class="control-label text-secondary">Company</label>
+                    <select asp-for="CompanyId" class ="form-control" asp-items="ViewBag.CompanyId"><option></option></select>
+                </div>
+            }
+            <div class="form-group form-check mt-2">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Active" /> @Html.DisplayNameFor(model => model.Active)
+                    <input type="checkbox" required class="form-check-input" asp-for="Display" /> @Html.DisplayNameFor(model => model.Display) <a asp-action="Privacy" asp-controller="Home">Regulamin</a>
                 </label>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Display" /> @Html.DisplayNameFor(model => model.Display)
-                </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="CompanyId" class="control-label"></label>
-                <select asp-for="CompanyId" class ="form-control" asp-items="ViewBag.CompanyId"></select>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div class="d-flex justify-content-around mt-3">
+                <div class="form-group">
+                    <input type="submit" value="Wyślij" class="btn btn-primary rounded-5" />
+                </div>
+                <div class="form-group">
+                    <a asp-action="Index" class="btn btn-outline-secondary rounded-5">Anuluj</a>
+                </div>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using HRSDmgmt.Data;
 using HRSDmgmt.Models;
 using System.Xml.Linq;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace HRSDmgmt.Controllers
 {
@@ -21,6 +23,7 @@ namespace HRSDmgmt.Controllers
         }
 
         // GET: Candidates
+        [Authorize(Roles = "admin, user")]
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Candidate.Include(c => c.Employee).Include(c => c.Offer);
@@ -28,6 +31,7 @@ namespace HRSDmgmt.Controllers
         }
 
         // GET: Candidates/Details/5
+        [Authorize(Roles = "admin, user")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Candidate == null)
@@ -48,6 +52,7 @@ namespace HRSDmgmt.Controllers
         }
 
         // GET: Candidates/Create
+        [Authorize(Roles = "admin, user")]
         public IActionResult Create()
         {
             ViewData["EmployeeId"] = new SelectList(_context.Employees, "EmployeeId", "EmployeeId");
@@ -60,6 +65,7 @@ namespace HRSDmgmt.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin, user")]
         public async Task<IActionResult> Create([Bind("CandidateId,OfferId,EmployeeId")] Candidate candidate)
         {
             if (ModelState.IsValid && !SameCandidateExists(candidate))
@@ -78,6 +84,7 @@ namespace HRSDmgmt.Controllers
         }
 
         // GET: Candidates/Edit/5
+        [Authorize(Roles = "admin, user")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Candidate == null)
@@ -100,6 +107,7 @@ namespace HRSDmgmt.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin, user")]
         public async Task<IActionResult> Edit(int id, [Bind("CandidateId,OfferId,EmployeeId")] Candidate candidate)
         {
             if (id != candidate.CandidateId)
@@ -133,6 +141,7 @@ namespace HRSDmgmt.Controllers
         }
 
         // GET: Candidates/Delete/5
+        [Authorize(Roles = "admin, user")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Candidate == null)
@@ -155,6 +164,7 @@ namespace HRSDmgmt.Controllers
         // POST: Candidates/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin, user")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.Candidate == null)

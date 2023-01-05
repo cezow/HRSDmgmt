@@ -11,9 +11,9 @@ namespace HRSDmgmt.Models
             [DisplayName("Id")]
             public int OfferId { get; set; }
 
-            [Required(ErrorMessage = "Proszę podać nazwę firmy")]
-            [DisplayName("Nazwa oferty")]
-            [MaxLength(30, ErrorMessage = "Nazwa oferty nie może być dłuższa niż 30 znaków")]
+            [Required(ErrorMessage = "Proszę podać nazwę firmy i dane kontaktowe")]
+            [DisplayName("Nazwa firmy/oferty i dane kontaktowe")]
+            [MaxLength(50, ErrorMessage = "Opis nie może być dłuższa niż 50 znaków")]
             public string? Name { get; set; }
 
             [Required(ErrorMessage = "Proszę podać opis oferty")]

@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HRSDmgmt.Data;
 using HRSDmgmt.Models;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace HRSDmgmt.Controllers
 {
@@ -20,12 +22,14 @@ namespace HRSDmgmt.Controllers
         }
 
         // GET: Employees
+        [Authorize(Roles = "admin, user")]
         public async Task<IActionResult> Index()
         {
               return View(await _context.Employees.ToListAsync());
         }
 
         // GET: Employees/Details/5
+        [Authorize(Roles = "admin, user")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Employees == null)
@@ -44,6 +48,7 @@ namespace HRSDmgmt.Controllers
         }
 
         // GET: Employees/Create
+        [Authorize(Roles = "admin, user")]
         public IActionResult Create()
         {
             return View();
@@ -54,6 +59,7 @@ namespace HRSDmgmt.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin, user")]
         public async Task<IActionResult> Create([Bind("EmployeeId,FirstName,LastName,Mobile,Email,Education,Profession,Skills,Experience,CV,Working")] Employee employee)
         {
             if (ModelState.IsValid)
@@ -66,6 +72,7 @@ namespace HRSDmgmt.Controllers
         }
 
         // GET: Employees/Edit/5
+        [Authorize(Roles = "admin, user")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Employees == null)
@@ -86,6 +93,7 @@ namespace HRSDmgmt.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin, user")]
         public async Task<IActionResult> Edit(int id, [Bind("EmployeeId,FirstName,LastName,Mobile,Email,Education,Profession,Skills,Experience,CV,Working")] Employee employee)
         {
             if (id != employee.EmployeeId)
@@ -117,6 +125,7 @@ namespace HRSDmgmt.Controllers
         }
 
         // GET: Employees/Delete/5
+        [Authorize(Roles = "admin, user")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Employees == null)
@@ -137,6 +146,7 @@ namespace HRSDmgmt.Controllers
         // POST: Employees/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin, user")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.Employees == null)
