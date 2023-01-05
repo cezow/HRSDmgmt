@@ -27,10 +27,10 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                   id @Html.DisplayFor(modelItem => item.Offer.OfferId): @Html.DisplayFor(modelItem => item.Offer.Name)
+                   id oferty-@Html.DisplayFor(modelItem => item.Offer.OfferId): @Html.DisplayFor(modelItem => item.Offer.Name)
             </td>
             <td>
-                   id @Html.DisplayFor(modelItem => item.Employee.EmployeeId): @Html.DisplayFor(modelItem => item.Employee.FullName)
+                   id pracownika-@Html.DisplayFor(modelItem => item.Employee.EmployeeId): @Html.DisplayFor(modelItem => item.Employee.FullName)
             </td>
             <td>
             <a class="btn btn-outline-primary btn-sm rounded-3 my-1" asp-action="Edit" asp-route-id="@item.CandidateId">

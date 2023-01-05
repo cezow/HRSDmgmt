@@ -42,6 +42,12 @@ namespace HRSDmgmt.Controllers
                 return NotFound();
             }
 
+            var candidates = await _context.Candidate
+                .Where(c => c.OfferId == id)
+                .ToListAsync();
+
+            ViewBag.Candidates = candidates;
+
             return View(offer);
         }
 

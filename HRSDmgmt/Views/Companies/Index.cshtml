@@ -12,7 +12,7 @@
 </p>
 
 
-<table class="table bg-white shadow rounded-4">
+<table class="table bg-white shadow rounded-4" id="tabela">
     <thead class="bg-danger text-white">
         <tr>
             <th>
@@ -123,3 +123,37 @@
         }
     </tbody>
 </table>
+
+@section Scripts{
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.13.1/datatables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#tabela').DataTable({
+                language: {
+                    "decimal": "",
+                    "emptyTable": "Brak danych",
+                    "info": "Pozycje od _START_ do _END_ z _TOTAL_ rekordów",
+                    "infoEmpty": "Pozycji 0 z 0 dostępnych",
+                    "infoFiltered": "(filtrowanie z _MAX_ dostępnych pozycji)",
+                    "infoPostFix": "",
+                    "thousands": " ",
+                    "lengthMenu": "Pokaż _MENU_ pozycji",
+                    "loadingRecords": "Ładowanie...",
+                    "processing": "Przetwarzanie...",
+                    "search": "Wyszukaj:",
+                    "zeroRecords": "Nie znaleziono danych",
+                    "paginate": {
+                        "first": "Pierwsza",
+                        "last": "Ostatnia",
+                        "next": "Następna",
+                        "previous": "Poprzednia"
+                    },
+                    "aria": {
+                        "sortAscending": ": sortuje kolumnę rosnąco",
+                        "sortDescending": ": sortuje kolumnę malejąco"
+                    }
+                }
+            });
+        });
+    </script>
+}
