@@ -37,7 +37,8 @@ namespace HRSDmgmt.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Jobs(string Referencja, IFormFile userAttachment)
         {
-            MailMessage message = new MailMessage(new MailAddress("humberto.sporer@ethereal.email"), new MailAddress("humberto.sporer@ethereal.email"));
+            MailMessage message = new MailMessage(new MailAddress("humberto.sporer@ethereal.email"), 
+                                                    new MailAddress("humberto.sporer@ethereal.email"));
             message.Subject = "Aplikacja na stanowisko, ref: " + Referencja;
             message.Body = "CV kandydata w załączeniu";
             message.IsBodyHtml = false;
@@ -73,12 +74,14 @@ namespace HRSDmgmt.Controllers
         public async Task<IActionResult> Dashboard()
         {
             var companies = await _context.Companies.ToListAsync();
-            var offers = await _context.Offers.ToListAsync();
+            var offers = await _context.Offers.Where(o => o.Active == true).ToListAsync();
             var employees = await _context.Employees.ToListAsync();
+            var candidates = await _context.Candidates.ToListAsync();
 
             ViewBag.Companies = companies.Count();
             ViewBag.Offers = offers.Count();
             ViewBag.Employees = employees.Count();
+            ViewBag.Candidates = candidates.Count();
 
             return View();
         }

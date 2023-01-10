@@ -9,6 +9,7 @@ using HRSDmgmt.Data;
 using HRSDmgmt.Models;
 using Microsoft.AspNetCore.Authorization;
 using System.Data;
+using System.Threading;
 
 namespace HRSDmgmt.Controllers
 {
@@ -30,7 +31,6 @@ namespace HRSDmgmt.Controllers
         }
 
         // GET: Offers
-        [Authorize(Roles = "admin, user")]
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Offers.Include(o => o.Company).Where(o => o.Active == true);
@@ -80,11 +80,14 @@ namespace HRSDmgmt.Controllers
         {
             if (ModelState.IsValid)
             {
+                ViewBag.sent = "Zlecenie zostało wysłane";
                 _context.Add(offer);
                 await _context.SaveChangesAsync();
+                Thread.Sleep(4000);
                 return RedirectToAction(nameof(Index));
             }
             ViewData["CompanyId"] = new SelectList(_context.Companies.Where(c => c.Active == true), "CompanyId", "Name", offer.CompanyId);
+            
             return View(offer);
         }
 

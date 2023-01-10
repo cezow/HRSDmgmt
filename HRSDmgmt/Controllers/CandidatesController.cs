@@ -56,7 +56,7 @@ namespace HRSDmgmt.Controllers
         public IActionResult Create()
         {
             ViewData["EmployeeId"] = new SelectList(_context.Employees, "EmployeeId", "EmployeeId");
-            ViewData["OfferId"] = new SelectList(_context.Offers, "OfferId", "OfferId");
+            ViewData["OfferId"] = new SelectList(_context.Offers.Where(o => o.Active == true), "OfferId", "OfferId");
             return View();
         }
 

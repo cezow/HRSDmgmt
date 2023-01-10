@@ -54,7 +54,6 @@ namespace HRSDmgmt.Models
             public int? CompanyId { get; set; }
             [ForeignKey("CompanyId")]
             public virtual Company? Company { get; set; }
-
             public virtual ICollection<Candidate>? Candidates { get; set; }
         }
    }

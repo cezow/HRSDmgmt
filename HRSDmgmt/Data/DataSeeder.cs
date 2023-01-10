@@ -25,7 +25,6 @@ namespace HRSDmgmt.Data
                     SeedEmployees(dbContext);
                 }
         }
-
         private static void SeedRoles(ApplicationDbContext dbContext)
         {
             var roleStore = new RoleStore<IdentityRole>(dbContext);
@@ -111,7 +110,7 @@ namespace HRSDmgmt.Data
                 userStore.AddToRoleAsync(user, "user").Wait();
                 dbContext.SaveChanges();
             }
-            for (int i=1; i>=2; i++)
+            for (int i=1; i<=2; i++)
             {
                 if (!dbContext.Users.Any(u => u.UserName == "company"+ i.ToString() + "@firma.pl"))
                 {
@@ -135,7 +134,7 @@ namespace HRSDmgmt.Data
                     dbContext.SaveChanges();
                 }
             }
-            for (int i=1; i>=5; i++)
+            for (int i=1; i<=5; i++)
             {
                 if (!dbContext.Users.Any(u => u.UserName == "employee" + i.ToString() + "@firma.pl"))
                 {
@@ -170,7 +169,8 @@ namespace HRSDmgmt.Data
                     {
                         Name = "Stocznia Gdańska",
                         NIP = "1234567890",
-                        Description="jedna z największych polskich stoczni, zlokalizowana w Gdańsku na lewym brzegu Martwej Wisły i na Ostrowiu.",
+                        Description="jedna z największych polskich stoczni, " +
+                        "zlokalizowana w Gdańsku na lewym brzegu Martwej Wisły i na Ostrowiu.",
                         Address="Na Ostrowiu 15/20, 80-873 Gdańsk",
                         Country="Polska",
                         ContactPerson="Jan Rybak",
@@ -226,7 +226,6 @@ namespace HRSDmgmt.Data
 
             }
         }
-
         private static void SeedEmployees(ApplicationDbContext dbContext)
         {
             if (!dbContext.Employees.Any())
@@ -241,8 +240,10 @@ namespace HRSDmgmt.Data
                         Email       = "employee" + i.ToString() + "@hotmail.com",
                         Education   = "Szkoła zawodowa",
                         Profession  = i<=3 ? "spawacz" : "monter",
-                        Skills      = i <= 3 ? "spawanie metodą TIG 141 i elekrodą 111" : "znajomość rysunku izometrycznego",
-                        Experience  = i <= 3 ? "12 lat doświadczenia w pracach jako spawacz" : "montaż rurociągów i konstrukcji stalowych, praca na stoczni",
+                        Skills      = i <= 3 ? "spawanie metodą TIG 141 i elekrodą 111" : 
+                                                "znajomość rysunku izometrycznego",
+                        Experience  = i <= 3 ? "12 lat doświadczenia w pracach jako spawacz" : 
+                                                "montaż rurociągów i konstrukcji stalowych, praca na stoczni",
                         CV          = "cv" + i + ".pdf",
                     };
                     dbContext.Set<Models.Employee>().Add(employee);

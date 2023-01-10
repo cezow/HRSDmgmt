@@ -70,7 +70,6 @@
         <dd class="col-sm-10">
             @foreach (var candidate in ViewBag.Candidates)
             {
-
                 <a asp-controller="Employees" asp-action="Details" asp-route-id="@candidate.EmployeeId">
                     <div>ID Pracownika: @candidate.EmployeeId</div>
                 </a>

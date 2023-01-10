@@ -19,14 +19,12 @@ namespace HRSDmgmt.Models
         [MaxLength(50)]
         public string? LastName { get; set; }
 
-
         [NotMapped]
         [Display(Name = "Pan/Pani")]
         public string FullName
         {
             get { return FirstName + " " + LastName; }
         }
-
         
         [Display(Name = "Konto firmowe?")]
         [DefaultValue(true)]
@@ -34,7 +32,5 @@ namespace HRSDmgmt.Models
 
         public virtual Company? Company { get; set; }
         public virtual Employee? Employee { get; set; }
-
-
     }
 }
